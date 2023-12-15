@@ -20,6 +20,17 @@ groups:
     annotations:
       summary: "Aleo latest height has not increased in the last 5 minutes"
 
+- name: aptos
+  rules:
+  - alert: mainnet node_not_syncing
+    expr: avg(increase(aptos_state_sync_version{chain="mainnet", type="synced"}[30s])) < 1
+    for: 15s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Aptos Node Not Syncing"
+      description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
+
 - name: targets
   rules:
   - alert: monitor_service_down
