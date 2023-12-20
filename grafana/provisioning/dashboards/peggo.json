@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -480,7 +480,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "{__name__=\"peggo_network_nonce\", chain=\"injective-1\", instance=\"peggo_exporter:9910\", job=\"peggo\"}"
+              "options": "{__name__=\"peggo_network_nonce\", instance=\"peggo_exporter:9910\", job=\"peggo\", orchestrator_address=\"inj1ztzjaptslmd7qxz4x8zjv747jrn5gqgfvfy6md\"}"
             },
             "properties": [
               {
@@ -492,7 +492,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "{__name__=\"peggo_orchestrator_nonce\", chain=\"injective-1\", instance=\"peggo_exporter:9910\", job=\"peggo\"}"
+              "options": "{__name__=\"peggo_orchestrator_nonce\", instance=\"peggo_exporter:9910\", job=\"peggo\", orchestrator_address=\"inj1ztzjaptslmd7qxz4x8zjv747jrn5gqgfvfy6md\"}"
             },
             "properties": [
               {
@@ -546,7 +546,109 @@
           "refId": "B"
         }
       ],
-      "title": "Nonce time series",
+      "title": "Nonce History",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{__name__=\"peggo_orchestrator_balance\", instance=\"peggo_exporter:9910\", job=\"peggo\", orchestrator_address=\"inj1ztzjaptslmd7qxz4x8zjv747jrn5gqgfvfy6md\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "$orchestrator_address"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "builder",
+          "expr": "peggo_orchestrator_balance",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Orchestrator Balance",
       "type": "timeseries"
     }
   ],
@@ -561,6 +663,10 @@
           "selected": true,
           "text": "None",
           "value": ""
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
         },
         "definition": "",
         "hide": 0,
@@ -581,13 +687,13 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Peggo Dashboard",
   "uid": "W0E_CfDIk",
-  "version": 6,
+  "version": 1,
   "weekStart": ""
 }
