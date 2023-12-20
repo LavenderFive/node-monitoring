@@ -6,8 +6,7 @@ networks:
 
 volumes:
     tenderduty:
-    prometheus_data:
-      external: true
+    prometheus_data: {}
     grafana_data: {}
     caddy_data: {}
     grafana-storage:
@@ -15,7 +14,7 @@ volumes:
 
 services:
   loki:
-    image: grafana/loki:2.6.0
+    image: grafana/loki:2.8.7
     container_name: loki
     ports:
       - "3100:3100"
@@ -24,7 +23,7 @@ services:
       - monitor-net
 
   prometheus:
-    image: prom/prometheus:v2.37.0
+    image: prom/prometheus:v2.48.0
     container_name: prometheus
     volumes:
       - ./prometheus:/etc/prometheus
