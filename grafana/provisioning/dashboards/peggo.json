@@ -659,23 +659,22 @@
     "list": [
       {
         "current": {
-          "isNone": true,
           "selected": true,
-          "text": "None",
-          "value": ""
+          "text": "inj1ztzjaptslmd7qxz4x8zjv747jrn5gqgfvfy6md",
+          "value": "inj1ztzjaptslmd7qxz4x8zjv747jrn5gqgfvfy6md"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
-        "definition": "",
+        "definition": "label_values(peggo_network_nonce, orchestrator_address)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
         "name": "orchestrator_address",
         "options": [],
         "query": {
-          "query": "",
+          "query": "label_values(peggo_network_nonce, orchestrator_address)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -694,6 +693,6 @@
   "timezone": "",
   "title": "Peggo Dashboard",
   "uid": "W0E_CfDIk",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }
