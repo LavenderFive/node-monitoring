@@ -1,4 +1,4 @@
-# injective-node-monitoring
+# node-monitoring
 
 A monitoring solution for Injective node runners and validators utilizing docker containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/),
 [Tenderduty](https://github.com/blockpane/tenderduty), [cAdvisor](https://github.com/google/cadvisor), [NodeExporter](https://github.com/prometheus/node_exporter), 
