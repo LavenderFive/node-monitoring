@@ -6,7 +6,8 @@ networks:
 
 volumes:
     tenderduty:
-    prometheus_data: {}
+    prometheus_data: 
+      external: true
     grafana_data: {}
     caddy_data: {}
     grafana-storage:

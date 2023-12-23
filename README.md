@@ -59,7 +59,7 @@ Containers:
 
 ## Setup Grafana
 
-### Peggo Grafana Dashboard
+### Grafana  Dashboard
 This monitoring solution comes built in with a *very basic* Peggo Monitoring dashboard, 
 which works out of the box. Grafana, Prometheus, and Infinity are installed 
 automatically.
@@ -67,7 +67,7 @@ automatically.
 #### 1. Create Persistent Storage
 To support persistent storage, you'll first need to create the volume:
 ```
-docker volume create grafana-storage
+docker volume create grafana-storage && docker volume create prometheus_data
 ```
 
 ---
