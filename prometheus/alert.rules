@@ -40,6 +40,49 @@ groups:
       summary: "Aptos Node Not Syncing"
       description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
 
+groups:
+- name: aptos
+  rules:
+  - alert: mainnet node_not_syncing
+    expr: avg(increase(aptos_state_sync_version{chain="mainnet", type="synced"}[30s])) < 1
+    for: 15s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Aptos Node Not Syncing"
+      description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
+
+- name: peggo_alerts
+  rules:
+  - alert: HighNonceDifference
+    expr: abs(peggo_network_nonce - peggo_orchestrator_nonce) > 5 and increase(peggo_orchestrator_nonce[1h]) <= 0
+    for: 15m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High difference between peggo_orchestrator_nonce and peggo_network_nonce"
+      description: "The difference between peggo_orchestrator_nonce and peggo_network_nonce has been greater than 5 for more than 15 minutes."
+
+- name: sei price feeder alerts
+  rules:
+  - alert: SeiPriceFeeder10PercentMissed
+    expr: (avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))) / avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss|success", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m])))) > 0.10
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High penalty rate on validator"
+      description: "Validator {{ $labels.validator }} has a penalty rate greater than 10 percent."
+
+  - alert: SeiPriceFeeder25PercentMissed
+    expr: (avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))) / avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss|success", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m])))) > 0.25
+    for: 15m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High penalty rate on validator"
+      description: "Validator {{ $labels.validator }} has a penalty rate greater than 25 percent."
+
 - name: targets
   rules:
   - alert: monitor_service_down
