@@ -65,17 +65,11 @@ groups:
 
 - name: sei price feeder alerts
   rules:
-  - alert: SeiPriceFeeder10PercentMissed
-    expr: &seipricefeeder_expr (avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))) / avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss|success", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))))
-    for: 15m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High penalty rate on validator"
-      description: "Validator {{ $labels.validator }} has a penalty rate greater than 10 percent."
+  - record: sei_oracle_vote_penalty_rate
+    expr: (avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))) / avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss|success", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))))
 
   - alert: SeiPriceFeeder10PercentMissed
-    expr: &seipricefeeder_expr > 0.10
+    expr: sei_oracle_vote_penalty_rate > 0.10
     for: 15m
     labels:
       severity: warning
@@ -84,13 +78,14 @@ groups:
       description: "Validator {{ $labels.validator }} has a penalty rate greater than 10 percent."
 
   - alert: SeiPriceFeeder25PercentMissed
-    expr: &seipricefeeder_expr > 0.25
+    expr: sei_oracle_vote_penalty_rate > 0.25
     for: 15m
     labels:
       severity: warning
     annotations:
       summary: "High penalty rate on validator"
       description: "Validator {{ $labels.validator }} has a penalty rate greater than 25 percent."
+
 
 - name: targets
   rules:
