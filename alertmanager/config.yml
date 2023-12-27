@@ -9,7 +9,8 @@ receivers:
 # https://www.pagerduty.com/docs/guides/prometheus-integration-guide/
   - name: pagerduty
     pagerduty_configs:
-    - service_key: <integration_key>
+    - routing_key: <integration_key>
+      severity: '{{ if .CommonLabels.severity }}{{ .CommonLabels.severity | toLower }}{{ else }}critical{{ end }}'
 
 # Documentation for Discord <> Alertmanager Integration
 # https://github.com/benjojo/alertmanager-discord
