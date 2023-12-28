@@ -1,0 +1,155 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 110,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "PANVPvdSk"
+            },
+            "gridPos": {
+                "h": 12,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 2,
+            "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "PANVPvdSk"
+                    },
+                    "editorMode": "builder",
+                    "expr": "{job=\"$job\", host=\"$host\", unit=\"$unit\"} |= ``",
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "title": "Active logs",
+            "type": "logs"
+        }
+    ],
+    "schemaVersion": 36,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "current": {
+                    "selected": true,
+                    "text": "systemd-journal",
+                    "value": "systemd-journal"
+                },
+                "datasource": {
+                    "type": "loki",
+                    "uid": "PANVPvdSk"
+                },
+                "definition": "label_values(job)",
+                "hide": 0,
+                "includeAll": false,
+                "multi": false,
+                "name": "job",
+                "options": [],
+                "query": "label_values(job)",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            },
+            {
+                "current": {
+                    "selected": true,
+                    "text": "master-four",
+                    "value": "master-four"
+                },
+                "datasource": {
+                    "type": "loki",
+                    "uid": "PANVPvdSk"
+                },
+                "definition": "label_values(host)",
+                "hide": 0,
+                "includeAll": false,
+                "multi": false,
+                "name": "host",
+                "options": [],
+                "query": "label_values(host)",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            },
+            {
+                "current": {
+                    "selected": true,
+                    "text": "secret-node.service",
+                    "value": "secret-node.service"
+                },
+                "datasource": {
+                    "type": "loki",
+                    "uid": "PANVPvdSk"
+                },
+                "definition": "label_values({host=\"$host\"}, unit)",
+                "hide": 0,
+                "includeAll": false,
+                "multi": false,
+                "name": "unit",
+                "options": [],
+                "query": "label_values({host=\"$host\"}, unit)",
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-5m",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Systemd monitoring",
+    "uid": "7YvSXXdSk",
+    "version": 4,
+    "weekStart": ""
+}
