@@ -1,0 +1,14 @@
+groups:
+  - name: Loki
+    rules:
+    - alert: AppHashDetected
+      expr: |
+        count_over_time({job="systemd-journal", unit=~".+", host=~".+"} |~ "AppHash"[5m]) > 0
+      for: 5s
+      labels:
+        severity: critical
+        unit: "{{ $labels.unit }}"
+        host: "{{ $labels.host }}"
+      annotations:
+        summary: "AppHash detected"
+        description: "The phrase 'AppHash' was detected in the logs."
