@@ -1,4 +1,16 @@
 groups:
+- name: aptos
+  rules:
+  - alert: mainnet node_not_syncing
+    expr: avg(increase(aptos_state_sync_version{chain="mainnet", type="synced"}[30s])) < 1
+    for: 15s
+    labels:
+      severity: critical
+      job: aptos
+    annotations:
+      summary: "Aptos Node Not Syncing"
+      description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
+
 - name: peggo_alerts
   rules:
   - alert: HighNonceDifference
@@ -6,18 +18,35 @@ groups:
     for: 15m
     labels:
       severity: critical
+      job: peggo
     annotations:
       summary: "High difference between peggo_orchestrator_nonce and peggo_network_nonce"
       description: "The difference between peggo_orchestrator_nonce and peggo_network_nonce has been greater than 5 for more than 15 minutes."
-  
+
   - alert: LowOrchestratorBalance
-    expr: peggo_orchestrator_balance < 0.05
-    for: 5m
+    expr: peggo_orchestrator_balance <= 0.05
+    for: 15m
     labels:
       severity: critical
+      job: peggo
     annotations:
-      summary: "Low orchestrator balance"
-      description: "The peggo_orchestrator_balance has gone below 0.05."
+      summary: "Orchestrator balance is low"
+      description: "Refill orchestrator wallet."
+
+- name: sei price feeder alerts
+  rules:
+  - record: sei_oracle_vote_penalty_rate
+    expr: (sum by(validator) (sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}) / sum by(validator) (sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss|success", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}))
+
+  - alert: SeiPriceFeeder20PercentMissed
+    expr: sei_oracle_vote_penalty_rate > 0.25
+    for: 30m
+    labels:
+      severity: warning
+      job: pricefeeder
+    annotations:
+      summary: "High penalty rate on validator"
+      description: "Validator {{ $labels.validator }} has a penalty rate greater than 25 percent."
 
 - name: aleo
   rules:
@@ -28,64 +57,6 @@ groups:
       severity: critical
     annotations:
       summary: "Aleo latest height has not increased in the last 5 minutes"
-
-- name: aptos
-  rules:
-  - alert: mainnet node_not_syncing
-    expr: avg(increase(aptos_state_sync_version{chain="mainnet", type="synced"}[30s])) < 1
-    for: 15s
-    labels:
-      severity: critical
-    annotations:
-      summary: "Aptos Node Not Syncing"
-      description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
-
-groups:
-- name: aptos
-  rules:
-  - alert: mainnet node_not_syncing
-    expr: avg(increase(aptos_state_sync_version{chain="mainnet", type="synced"}[30s])) < 1
-    for: 15s
-    labels:
-      severity: critical
-    annotations:
-      summary: "Aptos Node Not Syncing"
-      description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
-
-- name: peggo_alerts
-  rules:
-  - alert: HighNonceDifference
-    expr: abs(peggo_network_nonce - peggo_orchestrator_nonce) > 5 and increase(peggo_orchestrator_nonce[1h]) <= 0
-    for: 15m
-    labels:
-      severity: critical
-    annotations:
-      summary: "High difference between peggo_orchestrator_nonce and peggo_network_nonce"
-      description: "The difference between peggo_orchestrator_nonce and peggo_network_nonce has been greater than 5 for more than 15 minutes."
-
-- name: sei price feeder alerts
-  rules:
-  - record: sei_oracle_vote_penalty_rate
-    expr: (avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))) / avg by(validator) (sum by(validator) (rate(sei_oracle_vote_penalty_count{chain="pacific-1", type=~"abstain|miss|success", validator="seivaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zl6nups"}[10m]))))
-
-  - alert: SeiPriceFeeder10PercentMissed
-    expr: sei_oracle_vote_penalty_rate > 0.10
-    for: 15m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High penalty rate on validator"
-      description: "Validator {{ $labels.validator }} has a penalty rate greater than 10 percent."
-
-  - alert: SeiPriceFeeder25PercentMissed
-    expr: sei_oracle_vote_penalty_rate > 0.25
-    for: 15m
-    labels:
-      severity: warning
-    annotations:
-      summary: "High penalty rate on validator"
-      description: "Validator {{ $labels.validator }} has a penalty rate greater than 25 percent."
-
 
 - name: targets
   rules:
