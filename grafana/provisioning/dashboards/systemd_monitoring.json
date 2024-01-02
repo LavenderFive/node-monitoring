@@ -1,25 +1,25 @@
 {
     "annotations": {
-        "list": [
-            {
-                "builtIn": 1,
-                "datasource": {
-                    "type": "grafana",
-                    "uid": "-- Grafana --"
-                },
-                "enable": true,
-                "hide": true,
-                "iconColor": "rgba(0, 211, 255, 1)",
-                "name": "Annotations & Alerts",
-                "target": {
-                    "limit": 100,
-                    "matchAny": false,
-                    "tags": [],
-                    "type": "dashboard"
-                },
-                "type": "dashboard"
-            }
-        ]
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
     },
     "editable": true,
     "fiscalYearStartMonth": 0,
@@ -28,128 +28,202 @@
     "links": [],
     "liveNow": false,
     "panels": [
-        {
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "PANVPvdSk"
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "targets": [
+          {
             "datasource": {
-                "type": "loki",
-                "uid": "PANVPvdSk"
+              "type": "loki",
+              "uid": "PANVPvdSk"
             },
-            "gridPos": {
-                "h": 12,
-                "w": 24,
-                "x": 0,
-                "y": 0
+            "editorMode": "builder",
+            "expr": "{job=\"$job\", host=\"$host\", unit=\"$unit\"} |= ``",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Active logs",
+        "type": "logs"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "PANVPvdSk"
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 12,
+          "x": 0,
+          "y": 12
+        },
+        "id": 3,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "PANVPvdSk"
             },
-            "id": 2,
-            "options": {
-                "dedupStrategy": "none",
-                "enableLogDetails": true,
-                "prettifyLogMessage": false,
-                "showCommonLabels": false,
-                "showLabels": false,
-                "showTime": false,
-                "sortOrder": "Descending",
-                "wrapLogMessage": false
+            "editorMode": "builder",
+            "expr": "{job=\"$job\", host=\"$host\", unit=\"$unit\"} |= `Block.Header.AppHash`",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Apphash",
+        "type": "logs"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "PANVPvdSk"
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 12,
+          "x": 12,
+          "y": 12
+        },
+        "id": 4,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "PANVPvdSk"
             },
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "loki",
-                        "uid": "PANVPvdSk"
-                    },
-                    "editorMode": "builder",
-                    "expr": "{job=\"$job\", host=\"$host\", unit=\"$unit\"} |= ``",
-                    "queryType": "range",
-                    "refId": "A"
-                }
-            ],
-            "title": "Active logs",
-            "type": "logs"
-        }
+            "editorMode": "builder",
+            "expr": "{job=\"$job\", host=\"$host\", unit=\"$unit\"} |= `Block.Header.LastResultsHash`",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Apphash",
+        "type": "logs"
+      }
     ],
     "schemaVersion": 36,
     "style": "dark",
     "tags": [],
     "templating": {
-        "list": [
-            {
-                "current": {
-                    "selected": true,
-                    "text": "systemd-journal",
-                    "value": "systemd-journal"
-                },
-                "datasource": {
-                    "type": "loki",
-                    "uid": "PANVPvdSk"
-                },
-                "definition": "label_values(job)",
-                "hide": 0,
-                "includeAll": false,
-                "multi": false,
-                "name": "job",
-                "options": [],
-                "query": "label_values(job)",
-                "refresh": 1,
-                "regex": "",
-                "skipUrlSync": false,
-                "sort": 0,
-                "type": "query"
-            },
-            {
-                "current": {
-                    "selected": true,
-                    "text": "master-four",
-                    "value": "master-four"
-                },
-                "datasource": {
-                    "type": "loki",
-                    "uid": "PANVPvdSk"
-                },
-                "definition": "label_values(host)",
-                "hide": 0,
-                "includeAll": false,
-                "multi": false,
-                "name": "host",
-                "options": [],
-                "query": "label_values(host)",
-                "refresh": 1,
-                "regex": "",
-                "skipUrlSync": false,
-                "sort": 0,
-                "type": "query"
-            },
-            {
-                "current": {
-                    "selected": true,
-                    "text": "secret-node.service",
-                    "value": "secret-node.service"
-                },
-                "datasource": {
-                    "type": "loki",
-                    "uid": "PANVPvdSk"
-                },
-                "definition": "label_values({host=\"$host\"}, unit)",
-                "hide": 0,
-                "includeAll": false,
-                "multi": false,
-                "name": "unit",
-                "options": [],
-                "query": "label_values({host=\"$host\"}, unit)",
-                "refresh": 1,
-                "regex": "",
-                "skipUrlSync": false,
-                "sort": 0,
-                "type": "query"
-            }
-        ]
+      "list": [
+        {
+          "current": {
+            "selected": true,
+            "text": "systemd-journal",
+            "value": "systemd-journal"
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "PANVPvdSk"
+          },
+          "definition": "label_values(job)",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "job",
+          "options": [],
+          "query": "label_values(job)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": "something",
+            "value": "something"
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "PANVPvdSk"
+          },
+          "definition": "label_values(host)",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "host",
+          "options": [],
+          "query": "label_values(host)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": "seid.service",
+            "value": "seid.service"
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "PANVPvdSk"
+          },
+          "definition": "label_values({host=\"$host\"}, unit)",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "unit",
+          "options": [],
+          "query": "label_values({host=\"$host\"}, unit)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
     },
     "time": {
-        "from": "now-5m",
-        "to": "now"
+      "from": "now-6h",
+      "to": "now"
     },
     "timepicker": {},
     "timezone": "",
     "title": "Systemd monitoring",
     "uid": "7YvSXXdSk",
-    "version": 4,
+    "version": 7,
     "weekStart": ""
-}
+  }
