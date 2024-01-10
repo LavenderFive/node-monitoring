@@ -12,12 +12,18 @@ rule_files:
   - "alert.rules"
 
 scrape_config_files:
-  - /etc/prometheus/servers/*.yml
-  - /etc/prometheus/tendermint/*.yml
-  - /etc/prometheus/exporters.yml
+  - '/etc/prometheus/servers/*.yml'
+# - '/etc/prometheus/tendermint/*.yml'
+  - '/etc/prometheus/price_feeders/*.yml'
+  - '/etc/prometheus/non_cosmos/*.yml'
 
 # A scrape configuration containing exactly one endpoint to scrape.
 scrape_configs:
+  - job_name: 'nodeexporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['nodeexporter:9100']
+
   - job_name: 'cadvisor'
     scrape_interval: 5s
     static_configs:
@@ -26,7 +32,7 @@ scrape_configs:
   - job_name: 'prometheus'
     scrape_interval: 10s
     static_configs:
-      - targets: ['prometheus:9090']
+      - targets: ['localhost:9090']
 
   - job_name: 'pushgateway'
     scrape_interval: 10s
@@ -34,10 +40,497 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
-  - job_name: 'tenderduty'
-    metrics_path: '/metrics'
+  - job_name: 'aptos'
     static_configs:
-      - targets: ['tenderduty:28686']
+      - targets: ['aptos.lavenderfive.com:9101','aptos.lavenderfive.com:9100','vfn.aptos.lavenderfive.com:9101','vfn.aptos.lavenderfive.com:9100','135.148.123.8:9101','135.148.123.8:9100']
+        labels:
+          chain: 'mainnet'
+
+  - job_name: 'hermes'
+    static_configs:
+      - targets: ['65.108.238.102:4001']
+        labels:
+          chain: 'mainnet'
+
+  ##Price feeders and oracles##
+  - job_name: 'carbon@oracle'
+    metrics_path: '/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['65.108.238.103:19628']
+        labels:
+          chain: 'carbon-1'
+
+  - job_name: 'gbt'
+    static_configs:
+      - targets: ['142.132.158.93:6631']
+        labels:
+          chain: 'gravity-bridge-3'
+
+  - job_name: 'steward'
+    metrics_path: '/'
+    static_configs:
+      - targets: ['57.128.96.155:3000']
+        labels:
+          chain: 'sommelier-3'
+
+  - job_name: 'peggo'
+    metrics_path: '/'
+    static_configs:
+      - targets: ['peggo_exporter:9910']
+        labels:
+          chain: 'injective-1'
+
+  - job_name: nomic-signer
+    metrics_path: '/'
+    static_configs:
+      - targets: ['142.132.158.93:26662']
+        labels:
+          chain: 'nomic-stakenet-3'
+
+  - job_name: 'sei-price-feeder'
+    metrics_path: '/api/v1/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['65.21.198.18:7171']
+        labels:
+          chain: 'pacific-1'
+
+  - job_name: 'yoda'
+    metrics_path: '/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['142.132.158.93:16862']
+        labels:
+          chain: 'odin-mainnet-freya'
+
+  - job_name: 'horcrux'
+    metrics_path: '/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['149.202.89.42:6122','85.10.203.220:6122','195.3.221.21:6122']
+        labels:
+          chain: 'stride-1'
+
+  ##Testnet Price feeders and oracles##
+  - job_name: 'nibiru-price-feeder'
+    metrics_path: '/api/v1/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['88.198.52.46:7172']
+  
+  - job_name: 'ojo-price-feeder'
+    metrics_path: '/api/v1/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['142.132.209.236:7172']
+  
+  - job_name: 'sei-price-feeder-atlantic'
+    metrics_path: '/api/v1/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['88.198.52.46:7171']
+        labels: 
+          chain: atlantic-2
+
+
+  ##Cosmos Mainnets##
+
+  - job_name: 'akash'
+    static_configs:
+      - targets: ['37.59.21.96:12861','142.132.158.93:12861']
+        labels:
+          chain: 'akashnet-2'
+
+  - job_name: 'archway'
+    static_configs:
+      - targets: ['57.128.96.155:11561','144.76.40.53:11561']
+        labels:
+          chain: 'archway-1'
+
+  - job_name: 'aura'
+    static_configs:
+      - targets: ['57.128.20.163:21761','144.76.40.53:21761']
+        labels:
+          chain: 'xstaxy-1'
+
+  - job_name: 'bitcanna'
+    static_configs:
+      - targets: ['135.148.169.198:13061','142.132.158.93:13061']
+        labels:
+          chain: 'bitcanna-1'
+
+  - job_name: 'bitsong'
+    static_configs:
+      - targets: ['135.148.169.198:16061','142.132.158.93:16061']
+        labels:
+          chain: 'bitsong-2b'
+
+  - job_name: 'carbon'
+    static_configs:
+      - targets: ['51.210.223.72:19661','65.108.238.103:19661']
+        labels:
+          chain: 'carbon-1'
+
+  - job_name: 'cheqd'
+    static_configs:
+      - targets: ['57.128.20.163:16161','142.132.158.93:16161']
+        labels:
+          chain: 'cheqd-mainnet-1'
+
+  - job_name: 'chihuahua'
+    static_configs:
+      - targets: ['135.148.169.198:12961','65.108.238.102:12961']
+        labels:
+          chain: 'chihuahua-1'
+
+  - job_name: 'comdex'
+    static_configs:
+      - targets: ['135.148.169.198:13161','142.132.158.93:13161']
+        labels:
+          chain: 'comdex-1'
+
+  - job_name: 'cosmoshub'
+    static_configs:
+      - targets: ['135.148.123.8:14961','142.132.158.93:14961','65.21.10.181:14961']
+        labels:
+          chain: 'cosmoshub-4'
+
+  - job_name: 'composable'
+    static_configs:
+      - targets: ['57.128.96.155:22261','144.76.40.53:22261']
+        labels:
+          chain: 'centauri-1'
+
+  - job_name: 'cudos'
+    static_configs:
+      - targets: ['51.210.223.80:12361','65.108.238.103:12361']
+        labels:
+          chain: 'cudos-1'
+
+  - job_name: 'desmos'
+    static_configs:
+      - targets: ['135.148.169.198:16261','142.132.158.93:16261']
+        labels:
+          chain: 'desmos-mainnet'
+
+  - job_name: 'dydx'
+    static_configs:
+      - targets: ['51.210.223.84:23861','136.243.67.47:23861']
+        labels:
+          chain: 'dydx-mainnet-1'
+
+  - job_name: 'evmos'
+    static_configs:
+      - targets: ['57.128.20.163:13461','65.108.238.102:13461']
+        labels:
+          chain: 'evmos_9001-2'
+
+  - job_name: 'firmachain'
+    static_configs:
+      - targets: ['135.148.169.198:16461','65.108.238.102:16461']
+        labels:
+          chain: 'colosseum-1'
+
+  - job_name: 'gitopia'
+    static_configs:
+      - targets: ['57.128.96.155:11361','144.76.40.53:11361']
+        labels:
+          chain: 'gitopia'
+
+  - job_name: 'gravitybridge'
+    static_configs:
+      - targets: ['51.210.223.80:14261','142.132.158.93:14261']
+        labels:
+          chain: 'gravity-bridge-3'
+
+  - job_name: 'haqq'
+    static_configs:
+      - targets: ['51.210.223.84:24061','65.109.82.87:24061']
+        labels:
+          chain: 'haqq_11235-1'
+
+  - job_name: 'impacthub'
+    static_configs:
+      - targets: ['135.148.169.198:16661','142.132.158.93:16661']
+        labels:
+          chain: 'ixo-5'
+
+  - job_name: 'injective'
+    static_configs:
+      - targets: ['57.128.20.163:14361','51.210.223.72:14361','65.109.82.87:14361,'65.21.10.181:14361']
+        labels:
+          chain: 'injective-1'
+
+  - job_name: 'jackal'
+    static_configs:
+      - targets: ['51.210.223.80:17561','144.76.40.53:17561']
+        labels:
+          chain: 'jackal-1'
+
+  - job_name: 'juno'
+    static_configs:
+      - targets: ['37.59.21.96:12661','65.108.238.102:12661']
+        labels:
+          chain: 'juno-1'
+
+  - job_name: 'kichain'
+    static_configs:
+      - targets: ['37.59.21.96:13561','142.132.158.93:13561']
+        labels:
+          chain: 'kichain-2'
+
+  - job_name: 'kujira'
+    static_configs:
+      - targets: ['146.59.85.223:11861','65.109.82.87:11861']
+        labels:
+          chain: 'kaiyo-1'
+
+  - job_name: 'kyve'
+    static_configs:
+      - targets: ['146.59.85.223:11061','65.108.238.102:11061']
+        labels:
+          chain: 'kyve'
+
+  - job_name: 'lumnetwork'
+    static_configs:
+      - targets: ['51.210.223.80:16761','142.132.158.93:16761']
+        labels:
+          chain: 'lum-network-1'
+
+  - job_name: 'mars'
+    static_configs:
+      - targets: ['146.59.85.223:18561','65.108.238.103:18561']
+        labels:
+          chain: 'mars-1'
+
+  - job_name: 'migaloo'
+    static_configs:
+      - targets: ['146.59.85.223:20761','65.108.238.102:20761']
+        labels:
+          chain: 'migaloo-1'
+
+  - job_name: 'neutron'
+    static_configs:
+      - targets: ['51.210.223.72:19161','144.76.40.53:19161']
+        labels:
+          chain: 'neutron-1'
+
+  - job_name: 'nibiru'
+    static_configs:
+      - targets: ['51.210.223.84:19861','144.76.40.53:19861']
+        labels:
+          chain: 'cataclysm-1'
+
+  - job_name: 'nois'
+    static_configs:
+      - targets: ['57.128.20.163:17361','144.76.40.53:17361']
+        labels:
+          chain: 'nois-1'
+
+  - job_name: 'nolus'
+    static_configs:
+      - targets: ['57.128.96.155:19761','144.76.40.53:19761']
+        labels:
+          chain: 'pirin-1'
+
+  - job_name: 'nomic'
+    static_configs:
+      - targets: ['51.210.223.80:26660','142.132.158.93:26660']
+        labels:
+          chain: 'nomic-stakenet-3'
+
+  - job_name: 'odin'
+    static_configs:
+      - targets: ['37.59.21.96:16861','142.132.158.93:16861']
+        labels:
+          chain: 'odin-mainnet-freya'
+
+  - job_name: 'omniflixhub'
+    static_configs:
+      - targets: ['135.148.169.198:16961','142.132.158.93:16961']
+        labels:
+          chain: 'omniflixhub-1'
+
+  - job_name: 'osmosis'
+    static_configs:
+      - targets: ['37.59.21.96:12561','65.108.238.103:12561']
+        labels:
+          chain: 'osmosis-1'
+
+  - job_name: 'passage'
+    static_configs:
+      - targets: ['37.59.21.96:15661','65.108.238.102:15661']
+        labels:
+          chain: 'passage-2'
+
+  - job_name: 'quasar'
+    static_configs:
+      - targets: ['57.128.20.163:18261','144.76.40.53:18261']
+        labels:
+          chain: 'quasar-1'
+
+  - job_name: 'qwoyn'
+    static_configs:
+      - targets: ['57.128.96.155:23561','65.109.82.87:23561']
+        labels:
+          chain: 'qwoyn-1'
+  
+  - job_name: 'quicksilver'
+    static_configs:
+      - targets: ['37.59.21.96:11161','65.108.238.102:11161']
+        labels:
+          chain: 'quicksilver-2'
+
+  - job_name: 'secretnetwork'
+    static_configs:
+      - targets: ['135.148.169.198:17161','135.148.123.8:17161',37.59.21.96:26661','135.148.123.8:10661','64.120.114.143:11661']
+        labels:
+          chain: 'secret-4'
+
+  - job_name: 'sei'
+    static_configs:
+      - targets: ['136.243.67.45:11961','57.128.96.155:11961','136.243.67.47:11961','65.21.198.18:11961']
+        labels:
+          chain: 'pacific-1'
+
+  - job_name: 'sommelier'
+    static_configs:
+      - targets: ['57.128.96.155:14161','65.108.238.103:14161']
+        labels:
+          chain: 'sommelier-3'
+
+  - job_name: 'tenet'
+    static_configs:
+      - targets: ['57.128.96.155:22461','144.76.40.53:22461']
+        labels:
+          chain: 'tenet_1559-1'
+
+  - job_name: 'teritori'
+    static_configs:
+      - targets: ['37.59.21.96:15961','65.108.238.102:15961']
+        labels:
+          chain: 'teritori-1'
+
+  - job_name: 'terra'
+    static_configs:
+      - targets: ['146.59.85.223:11761','65.108.238.103:11761']
+        labels:
+          chain: 'phoenix-1'
+
+  - job_name: 'ununifi'
+    static_configs:
+      - targets: ['146.59.85.223:23261','65.108.238.103:23261']
+        labels:
+          chain: 'ununifi-beta-v1'
+
+  - job_name: 'xpla'
+    static_configs:
+      - targets: ['57.128.20.163:20161','65.108.238.103:20161']
+        labels:
+          chain: 'dimension_37-1'
+
+  ##Substrate Mainnet##
+  - job_name: 'polkadot' 
+    static_configs: 
+    - targets: ['64.120.114.5:9615']
+
+  ##Cosmos Testnets##
+  - job_name: 'arkeo'
+    static_configs:
+      - targets: ['88.198.52.46:22861']
+        labels:
+          chain: 'arkeo'
+        
+  - job_name: 'atlantic-2'
+    static_configs:
+      - targets: ['88.198.52.46:11961','148.251.133.248:11961']
+        labels:
+          chain: 'atlantic-2'
+
+  - job_name: 'namada'
+    static_configs:
+      - targets: ['88.198.52.46:20061']
+        labels:
+          chain: 'public-testnet-14.5d79b6958580'
+
+  - job_name: 'penumbra cometbft'
+    static_configs:
+      - targets: ['142.132.209.236:21961']
+        labels:
+          chain: 'penumbra-testnet-titan'
+
+  - job_name: 'penumbra daemon'
+    metrics_path: metrics
+    static_configs:
+      - targets: ['127.0.0.1:21900']
+        labels:
+          chain: 'penumbra-testnet-titan'
+
+  - job_name: 'saga'
+    static_configs:
+      - targets: ['148.251.133.248:24961']
+        labels:
+          chain: 'ssc-testnet-1'
+
+  ##Substrate Testnets##
+  - job_name: 'avail' 
+    static_configs: 
+    - targets: ['142.132.209.236:9615']
+
+  ##Other Testnet##
+  - job_name: node_autonity
+    metrics_path: /debug/metrics/prometheus
+    scheme: http
+    static_configs:
+      - targets: ['51.210.223.68:6064']
+
+  ##Lava Provider Testnet##
+  - job_name: 'lava-evmos' 
+    static_configs: 
+    - targets: ['65.108.105.48:7771']
+
+  - job_name: 'lava-axelar' 
+    static_configs: 
+    - targets: ['65.108.105.48:7772']
+
+  ## Relayers
+  - job_name: 'go-rly'
+    metrics_path: 'relayer/metrics'
+    static_configs:
+    - targets: ['65.109.135.253:5183','65.108.238.102:5183','142.132.158.93:5183','65.108.238.103:5183','144.76.40.53:5183','65.109.82.87:5183']
+      labels: 
+          chain: 'go-rly'
+
+  - job_name: 'hermes-metrics'
+    static_configs:
+    - targets: ['65.109.135.253:4001','65.108.238.102:4001','142.132.158.93:4001','65.108.238.103:4001','144.76.40.53:4001','65.109.82.87:4001']
+      labels: 
+          chain: 'hermes'
+
+  
+  ## Lido
+  - job_name: ssv
+    metrics_path: /metrics
+    static_configs:
+    - targets: ['64.120.114.143:15000']
+  
+
+# Prometheus.yaml example for checklyhq integration
+  - job_name: aptos_checkly
+    metrics_path: "/accounts/8f7c90e6-c9b9-4fdb-8767-a88abe91e2a5/prometheus/metrics"
+    bearer_token: "QJTbf4auOLnJ6dSNLLt1RhVz"
+    scrape_interval: 15s
+    scheme: https
+    static_configs:
+      - targets: ["api.checklyhq.com"]
 
 alerting:
   alertmanagers:
