@@ -14,7 +14,10 @@ groups:
 - name: peggo_alerts
   rules:
   - alert: HighNonceDifference
-    expr: abs(peggo_network_nonce - peggo_orchestrator_nonce) > 5 and increase(peggo_orchestrator_nonce[15m]) <= 0
+    expr: |
+      abs(peggo_network_nonce - peggo_orchestrator_nonce) > 5 
+      and 
+      changes(peggo_orchestrator_nonce[15m]) <= 0
     for: 15m
     labels:
       severity: critical
