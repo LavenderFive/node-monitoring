@@ -38,6 +38,7 @@ groups:
     for: 15m
     labels:
       severity: critical
+      job: peggo
     annotations:
       summary: "Peggo is down"
       description: "The systemd service 'peggo.service' has been down for more than 15 minutes."
