@@ -195,6 +195,7 @@ groups:
       for: 5m
       labels:
         severity: critical
+        labels: near
       annotations:
         summary: "Near Node Version needs updated."
         description: "Your version is out of date and you risk getting kicked."
@@ -203,8 +204,18 @@ groups:
       for: 2m
       labels:
         severity: critical
+        labels: near
       annotations:
         description: 'Pool is below the current seat price'
+    - alert: NearBlockNumberNotIncreasing
+      expr: increase(near_block_number[5m]) <= 0
+      for: 5m
+      labels:
+        severity: critical
+        labels: near
+      annotations:
+        summary: "Near Block Number Not Increasing"
+        description: "The near_block_number has not increased in the last 5 minutes."
 
 - name: peggo_alerts
   rules:

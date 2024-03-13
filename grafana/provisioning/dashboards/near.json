@@ -327,6 +327,15 @@
             "interval": "",
             "legendFormat": "",
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "expr": "near_epoch_height",
+            "hide": false,
+            "refId": "B"
           }
         ],
         "title": "Epoch Start Height",
@@ -440,24 +449,9 @@
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
-        "description": "System uptime",
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "decimals": 1,
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "text": "N/A"
-                  }
-                },
-                "type": "special"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -466,12 +460,11 @@
                   "value": null
                 },
                 {
-                  "color": "red",
+                  "color": "rgb(106, 207, 94)",
                   "value": 80
                 }
               ]
-            },
-            "unit": "s"
+            }
           },
           "overrides": []
         },
@@ -481,20 +474,17 @@
           "x": 17,
           "y": 4
         },
-        "hideTimeOverride": true,
-        "id": 15,
-        "links": [],
-        "maxDataPoints": 100,
+        "id": 333,
         "options": {
-          "colorMode": "none",
+          "colorMode": "value",
           "graphMode": "none",
           "justifyMode": "auto",
-          "orientation": "horizontal",
+          "orientation": "vertical",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "fields": "/^{instance=\"127.0.0.0:9100\", job=\"node\"}$/",
+            "fields": "",
             "values": false
           },
           "textMode": "auto"
@@ -506,13 +496,13 @@
               "type": "prometheus",
               "uid": "${DS_PROMETHEUS}"
             },
-            "expr": "node_time_seconds{instance=~\"$node:$port\",job=~\"$job\"} - node_boot_time_seconds{instance=~\"$node:$port\",job=~\"$job\"}",
-            "intervalFactor": 2,
-            "refId": "A",
-            "step": 1800
+            "expr": "near_validator_active_total",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
           }
         ],
-        "title": "Uptime",
+        "title": "Active Validators",
         "type": "stat"
       },
       {
@@ -803,6 +793,37 @@
         },
         "fieldConfig": {
           "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
@@ -821,26 +842,23 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 4,
-          "w": 6,
+          "h": 5,
+          "w": 9,
           "x": 0,
           "y": 8
         },
         "id": 323,
         "interval": "",
         "options": {
-          "colorMode": "background",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
           },
-          "textMode": "auto"
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
         },
         "pluginVersion": "9.0.5",
         "targets": [
@@ -857,7 +875,7 @@
         ],
         "title": "Block Height",
         "transparent": true,
-        "type": "stat"
+        "type": "timeseries"
       },
       {
         "datasource": {
@@ -866,6 +884,9 @@
         },
         "fieldConfig": {
           "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
@@ -886,14 +907,11 @@
         "gridPos": {
           "h": 4,
           "w": 3,
-          "x": 6,
+          "x": 17,
           "y": 8
         },
         "id": 319,
         "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
           "orientation": "auto",
           "reduceOptions": {
             "calcs": [
@@ -902,7 +920,8 @@
             "fields": "",
             "values": false
           },
-          "textMode": "auto"
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
         },
         "pluginVersion": "9.0.5",
         "targets": [
@@ -915,71 +934,19 @@
             "interval": "",
             "legendFormat": "",
             "refId": "A"
-          }
-        ],
-        "title": "Syncing",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "rgb(106, 207, 94)",
-                  "value": 80
-                }
-              ]
-            }
           },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 3,
-          "x": 17,
-          "y": 8
-        },
-        "id": 333,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "vertical",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.0.5",
-        "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "${DS_PROMETHEUS}"
             },
-            "expr": "near_validator_active_total",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
+            "expr": "near_sync_status",
+            "hide": false,
+            "refId": "B"
           }
         ],
-        "title": "Active Validators",
-        "type": "stat"
+        "title": "Syncing",
+        "type": "gauge"
       },
       {
         "datasource": {
@@ -1422,183 +1389,6 @@
             {
               "evaluator": {
                 "params": [
-                  20
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "Total Peer Connections is Bellow 20",
-          "name": "Peer Connections Total Alert",
-          "noDataState": "alerting",
-          "notifications": [
-            {
-              "uid": "uwSILBiMk"
-            }
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "links": [],
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "transparent",
-                  "value": 20
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "near_peer_connections_total{instance=\"5.0.2.16:3030\", job=\"near-node\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Total Peers"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "near_peer_connections{encoding=\"Proto\", instance=\"5.0.2.16:3030\", job=\"near-node\", peer_type=\"Inbound\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Inbound Peers"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "near_peer_connections{encoding=\"Proto\", instance=\"5.0.2.16:3030\", job=\"near-node\", peer_type=\"Outbound\"}"
-              },
-              "properties": [
-                {
-                  "id": "displayName",
-                  "value": "Outbound Peers"
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 9,
-          "x": 0,
-          "y": 12
-        },
-        "id": 331,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "9.0.5",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "expr": "near_peer_connections_total",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
-            },
-            "expr": "near_peer_connections",
-            "hide": false,
-            "refId": "B"
-          }
-        ],
-        "title": "Peering",
-        "type": "timeseries"
-      },
-      {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
                   100000
                 ],
                 "type": "gt"
@@ -1734,6 +1524,183 @@
         "yaxis": {
           "align": false
         }
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  20
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "A",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "message": "Total Peer Connections is Bellow 20",
+          "name": "Peer Connections Total Alert",
+          "noDataState": "alerting",
+          "notifications": [
+            {
+              "uid": "uwSILBiMk"
+            }
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "line+area"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "transparent",
+                  "value": 20
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "near_peer_connections_total{instance=\"5.0.2.16:3030\", job=\"near-node\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Total Peers"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "near_peer_connections{encoding=\"Proto\", instance=\"5.0.2.16:3030\", job=\"near-node\", peer_type=\"Inbound\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Inbound Peers"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "near_peer_connections{encoding=\"Proto\", instance=\"5.0.2.16:3030\", job=\"near-node\", peer_type=\"Outbound\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Outbound Peers"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 9,
+          "x": 0,
+          "y": 13
+        },
+        "id": 331,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.0.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "expr": "near_peer_connections_total",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "expr": "near_peer_connections",
+            "hide": false,
+            "refId": "B"
+          }
+        ],
+        "title": "Peers",
+        "type": "timeseries"
       },
       {
         "collapsed": true,
@@ -15408,7 +15375,8 @@
     "schemaVersion": 36,
     "style": "dark",
     "tags": [
-      "linux"
+      "linux",
+      "near"
     ],
     "templating": {
       "list": [
@@ -15566,8 +15534,8 @@
       ]
     },
     "timezone": "browser",
-    "title": "Near Node Exporter Full",
+    "title": "Near Validator",
     "uid": "rYdddlPWkgg",
-    "version": 6,
+    "version": 10,
     "weekStart": ""
   }
