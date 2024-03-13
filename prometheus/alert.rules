@@ -180,6 +180,32 @@ groups:
     annotations:
       description: 'Your validator `{{ $labels.moniker }}` is jailed! `{{ $value }}`!'
 
+- name: Near Monitoring
+  rules:
+    - alert: InstanceDown
+      expr: up == 0
+      for: 1m
+      labels:
+        severity: "critical"
+      annotations:
+        summary: "Endpoint {{ $labels.instance }} down"
+        description: "{{ $labels.instance }} of job {{ $labels.job }} "
+    - alert: NearVersionBuildNotMatched
+      expr: near_version_build{instance="yournode.io", job="near"} != near_dev_version_build{instance="yournode.io", job="near"}
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Near Node Version needs updated."
+        description: "Your version is out of date and you risk getting kicked."
+    - alert: StakeBelowSeatPrice
+      expr: abs((near_current_stake / near_seat_price) * 100) < 100
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: 'Pool is below the current seat price'
+
 - name: peggo_alerts
   rules:
   - alert: HighNonceDifference
