@@ -218,6 +218,8 @@ services:
     image: lavender5/near_prometheus_exporter:latest
     container_name: near_exporter
     restart: unless-stopped
+    env_file:
+      - '.env'
     command:
       - '/bin/near_exporter'
       - '-accountId=${NEAR_ACCOUNT_ID}'
