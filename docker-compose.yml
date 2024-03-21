@@ -12,7 +12,7 @@ volumes:
     caddy_data: {}
     grafana-storage:
       external: true
-    loki: {}
+    loki_data: {}
 
 services:
   loki:
@@ -211,5 +211,19 @@ services:
       - NODE_URL=${ALEO_NODE_URL}
     ports:
       - "9911:9911"
+    networks:
+      - monitor-net
+
+  near_exporter:
+    image: lavender5/near_prometheus_exporter:latest
+    container_name: near_exporter
+    restart: unless-stopped
+    command:
+      - '/bin/near_exporter'
+      - '-accountId=${NEAR_ACCOUNT_ID}'
+      - '-external-rpc=${NEAR_NODE_URL}'
+      - '-url=${NEAR_NODE_URL}'
+    ports:
+      - "9333:9333"
     networks:
       - monitor-net

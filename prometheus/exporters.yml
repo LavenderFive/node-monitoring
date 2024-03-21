@@ -13,3 +13,8 @@ scrape_configs:
     metrics_path: '/'
     static_configs:
       - targets: ['aleo_exporter:9911']
+
+  - job_name: 'near_exporter'
+    metrics_path: '/'
+    static_configs:
+      - targets: ['near_exporter:9333']
