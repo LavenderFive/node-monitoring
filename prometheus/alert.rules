@@ -182,20 +182,12 @@ groups:
 
 - name: Near Monitoring
   rules:
-    - alert: InstanceDown
-      expr: up == 0
-      for: 1m
-      labels:
-        severity: "critical"
-      annotations:
-        summary: "Endpoint {{ $labels.instance }} down"
-        description: "{{ $labels.instance }} of job {{ $labels.job }} "
     - alert: NearVersionBuildNotMatched
       expr: near_version_build{instance="yournode.io", job="near"} != near_dev_version_build{instance="yournode.io", job="near"}
       for: 5m
       labels:
         severity: critical
-        labels: near
+        job: near
       annotations:
         summary: "Near Node Version needs updated."
         description: "Your version is out of date and you risk getting kicked."
@@ -204,7 +196,7 @@ groups:
       for: 2m
       labels:
         severity: critical
-        labels: near
+        job: near
       annotations:
         description: 'Pool is below the current seat price'
     - alert: NearBlockNumberNotIncreasing
@@ -212,16 +204,19 @@ groups:
       for: 5m
       labels:
         severity: critical
-        labels: near
+        job: near
       annotations:
         summary: "Near Block Number Not Increasing"
         description: "The near_block_number has not increased in the last 5 minutes."
     - alert: NearChunkProducedNotIncreasing
-      expr: increase(near_epoch_chunks_produced_number[5m]) <= 0 and near_epoch_chunks_produced_number < near_epoch_chunks_expected_number
-      for: 30m
+      expr: >
+        increase(near_epoch_chunks_produced_number[5m]) <= 0 and 
+        near_epoch_chunks_produced_number < near_epoch_chunks_expected_number and 
+        increase(near_epoch_chunks_produced_number[5m]) != increase(near_epoch_chunks_expected_number[5m])
+      for: 5m
       labels:
         severity: critical
-        labels: near
+        job: near
       annotations:
         summary: "Near Chunks Produced Not Increasing"
         description: "The near_epoch_chunks_produced_number has not increased in the last 5 minutes."
