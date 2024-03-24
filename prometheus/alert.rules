@@ -92,7 +92,7 @@ groups:
     expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
     for: 2m
     labels:
-      severity: major
+      severity: warning
       service: node_exporter
     annotations:
       description: 'Node memory is filling up < 10% left\n  VALUE = {{ $value }}\n LABELS: {{ $labels.instance }}'
@@ -101,7 +101,7 @@ groups:
     expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80
     for: 0m
     labels:
-      severity: major
+      severity: warning
       service: node_exporter
     annotations:
       description: 'CPU load is > 80%\n  VALUE = {{ $value }}\n LABELS: {{ $labels.instance }}'
@@ -110,7 +110,7 @@ groups:
     expr: node_timex_sync_status{} != 1
     for: 5m
     labels:
-      severity: major
+      severity: warning
       service: node_exporter
     annotations:
       description: 'Time on instance "{{ $labels.instance }}" not in sync with NTP.'
@@ -119,7 +119,7 @@ groups:
     expr: time() - node_textfile_mtime_seconds{} > 3000
     for: 5m
     labels:
-      severity: major
+      severity: warning
       service: node_exporter
     annotations:
       description: 'Node-exporter textfile collector for file "{{ $labels.file }}" on "{{ $labels.instance }}" has been down for 5 minutes.'
@@ -128,7 +128,7 @@ groups:
     expr: node_textfile_scrape_error != 0
     for: 5m
     labels:
-      severity: major
+      severity: warning
       service: node_exporter
     annotations:
       description: 'Node-exporter textfile collector scraping error on "{{ $labels.instance }}".'
@@ -139,7 +139,7 @@ groups:
     expr: tendermint_p2p_peers{job="cosmos"} < 2
     for: 5m
     labels:
-      severity: major
+      severity: warning
       service: cosmos-monitoring
     annotations:
       description: 'P2P Peers on `{{ $labels.instance }}` is lower than threshold (current value: {{ $value }})'
@@ -148,7 +148,7 @@ groups:
     expr: increase(cosmos_validator_missed_blocks[5m]) > 10
     for: 5m
     labels:
-      severity: major
+      severity: warning
       service: cosmos-monitoring
     annotations:
       description: 'Validator `{{ $labels.moniker }}` is missing `{{ $value }}` blocks!'
@@ -157,7 +157,7 @@ groups:
     expr: increase(tendermint_consensus_latest_block_height[5m]) < 10
     for: 5m
     labels:
-      severity: major
+      severity: warning
       service: cosmos-monitoring
     annotations:
       description: 'Degraded syncing performance - Job {{ $labels.job }} on {{ $labels.instance }}'
@@ -166,7 +166,7 @@ groups:
     expr: cosmos_validator_rank > (count(cosmos_validators_active == 1) - 10)
     for: 5m
     labels:
-      severity: major
+      severity: warning
       service: cosmos-monitoring
     annotations:
       description: 'Your validator `{{ $labels.moniker }}` rank is `{{ $value }}`!'
@@ -186,7 +186,7 @@ groups:
       expr: near_version_build{instance="yournode.io", job="near"} != near_dev_version_build{instance="yournode.io", job="near"}
       for: 5m
       labels:
-        severity: critical
+        severity: warning
         job: near
       annotations:
         summary: "Near Node Version needs updated."
@@ -195,7 +195,7 @@ groups:
       expr: abs((near_current_stake / near_seat_price) * 100) < 100
       for: 2m
       labels:
-        severity: critical
+        severity: warning
         job: near
       annotations:
         description: 'Pool is below the current seat price'
@@ -203,7 +203,7 @@ groups:
       expr: increase(near_block_number[5m]) <= 0
       for: 5m
       labels:
-        severity: critical
+        severity: warning
         job: near
       annotations:
         summary: "Near Block Number Not Increasing"
@@ -215,7 +215,7 @@ groups:
         increase(near_epoch_chunks_produced_number[5m]) != increase(near_epoch_chunks_expected_number[5m])
       for: 5m
       labels:
-        severity: critical
+        severity: warning
         job: near
       annotations:
         summary: "Near Chunks Produced Not Increasing"
