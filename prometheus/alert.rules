@@ -218,7 +218,7 @@ groups:
         description: "The near_block_number has not increased in the last 5 minutes."
     - alert: NearChunkProducedNotIncreasing
       expr: increase(near_epoch_chunks_produced_number[5m]) <= 0 and near_epoch_chunks_produced_number < near_epoch_chunks_expected_number
-      for: 5m
+      for: 30m
       labels:
         severity: critical
         labels: near
