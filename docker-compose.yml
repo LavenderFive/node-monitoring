@@ -16,7 +16,7 @@ volumes:
 
 services:
   loki:
-    image: grafana/loki:2.8.7
+    image: grafana/loki:2.9.4
     container_name: loki
     volumes:
       - ./loki:/etc/loki
@@ -137,13 +137,14 @@ services:
       org.label-schema.group: "monitoring"
 
   caddy:
-    image: caddy:2.3.0
+    image: caddy:2.7.6
     container_name: caddy
     ports:
       - "80:80"
       - "443:443"
       - "443:443/udp"
       - "3000:3000"
+      - "3100:3100"
       - "9090:9090"
       - "9093:9093"
       - "9091:9091"
