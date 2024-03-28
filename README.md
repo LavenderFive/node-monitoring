@@ -1,20 +1,20 @@
 # node-monitoring
 
-A monitoring solution for Injective node runners and validators utilizing docker containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/),
+A monitoring solution for node runners and validators utilizing docker containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/),
 [Tenderduty](https://github.com/blockpane/tenderduty), [cAdvisor](https://github.com/google/cadvisor), [NodeExporter](https://github.com/prometheus/node_exporter), 
 and alerting with [AlertManager](https://github.com/prometheus/alertmanager). 
 
-This is intended to be a single-stop solution for monitoring your Injectives validator signing state and Peggo signing state.
+This is intended to be a single-stop solution for monitoring your blockchain validator signing state.
 
 ## Install
 
-Clone this repository on your Docker host, cd into injective-node-monitoring directory and run compose up:
+Clone this repository on your Docker host, cd into node-monitoring directory and run compose up:
 
 ```bash
-git clone https://github.com/LavenderFive/injective-node-monitoring
-cd injective-node-monitoring
+git clone https://github.com/LavenderFive/node-monitoring
+cd node-monitoring
 
-ADMIN_USER=admin ADMIN_PASSWORD=admin ADMIN_PASSWORD_HASH=JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP docker-compose up -d
+docker-compose up -d
 ```
 
 **Caddy v2 does not accept plaintext passwords. It MUST be provided as a hash value. The above password hash corresponds to ADMIN_PASSWORD 'admin'. To know how to generate hash password, refer [Updating Caddy to v2](#Updating-Caddy-to-v2)**
@@ -53,7 +53,7 @@ Containers:
 1. replace YOUR_EMAIL@EMAIL.COM with your email
 1. point your dns to your monitoring server
 -----------------
-1. cd ~/injective-node-monitoring
+1. cd ~/node-monitoring
 1. docker compose up -d
 ```
 
@@ -104,7 +104,7 @@ Grafana is preconfigured with dashboards and Prometheus as the default data sour
 
 ***Monitor Services Dashboard***
 
-![Monitor Services](https://raw.githubusercontent.com/LavenderFive/injective-node-monitoring/master/screens/Grafana_Prometheus.png)
+![Monitor Services](https://raw.githubusercontent.com/LavenderFive/node-monitoring/master/screens/Grafana_Prometheus.png)
 
 The Monitor Services Dashboard shows key metrics for monitoring the containers that make up the monitoring stack:
 
@@ -119,10 +119,10 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 
 ## Define alerts
 
-Two alert groups have been setup within the [alert.rules](https://github.com/LavenderFive/injective-node-monitoring/blob/master/prometheus/alert.rules) configuration file:
+Two alert groups have been setup within the [alert.rules](https://github.com/LavenderFive/node-monitoring/blob/master/prometheus/alert.rules) configuration file:
 
-* Monitoring services alerts [targets](https://github.com/LavenderFive/injective-node-monitoring/blob/master/prometheus/alert.rules#L13-L22)
-* Peggo alerts [peggo](https://github.com/LavenderFive/injective-node-monitoring/blob/master/prometheus/alert.rules#L2-L11)
+* Monitoring services alerts [targets](https://github.com/LavenderFive/node-monitoring/blob/master/prometheus/alert.rules#L13-L22)
+* Peggo alerts [peggo](https://github.com/LavenderFive/node-monitoring/blob/master/prometheus/alert.rules#L2-L11)
 
 You can modify the alert rules and reload them by making a HTTP POST call to Prometheus:
 
@@ -171,7 +171,7 @@ A complete list of integrations can be found [here](https://prometheus.io/docs/a
 
 You can view and silence notifications by accessing `http://<host-ip>:9093`.
 
-The notification receivers can be configured in [alertmanager/config.yml](https://github.com/LavenderFive/injective-node-monitoring/blob/master/alertmanager/config.yml) file.
+The notification receivers can be configured in [alertmanager/config.yml](https://github.com/LavenderFive/node-monitoring/blob/master/alertmanager/config.yml) file.
 
 To receive alerts via Slack you need to make a custom integration by choose ***incoming web hooks*** in your Slack team app page.
 You can find more details on setting up Slack integration [here](http://www.robustperception.io/using-slack-with-the-alertmanager/).
@@ -192,4 +192,4 @@ receivers:
             api_url: 'https://hooks.slack.com/services/<webhook-id>'
 ```
 
-![Slack Notifications](https://raw.githubusercontent.com/LavenderFive/injective-node-monitoring/master/screens/Slack_Notifications.png)
+![Slack Notifications](https://raw.githubusercontent.com/LavenderFive/node-monitoring/master/screens/Slack_Notifications.png)
