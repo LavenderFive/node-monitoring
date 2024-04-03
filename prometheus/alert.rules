@@ -316,3 +316,17 @@ groups:
       severity: critical
     annotations:
       summary: "SSV Operator Down for instance: {{ $labels.instance }}"
+  - alert: SSVLowPeers
+    expr: ssv_p2p_all_connected_peers < 10
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "SSV Operator Peers low for instance: {{ $labels.instance }}"
+  - alert: SSVLowPerformance
+    expr: sum(rate(ssv_validator_roles_failed{instance=~"$instance.*"}[5m])) > sum(rate(ssv_validator_roles_submitted{instance=~"$instance.*"}[5m]))
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "SSV Failed Submissions too high for instance: {{ $labels.instance }}"
