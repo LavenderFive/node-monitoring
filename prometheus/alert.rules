@@ -296,21 +296,21 @@ groups:
 - name: SSV
   rules:
   - alert: SSVBeaconNodeDown
-    expr: ssv_beacon_status{instance=~"$instance.*"} < 2
+    expr: ssv_beacon_status < 2
     for: 5m
     labels:
       severity: critical
     annotations:
       summary: "SSV <> ETH Beacon Node Down for instance: {{ $labels.instance }}"
   - alert: SSVExecutionNodeDown
-    expr: ssv_eth1_status{instance=~"$instance.*"} < 2
+    expr: ssv_eth1_status < 2
     for: 5m
     labels:
       severity: critical
     annotations:
       summary: "SSV <> ETH Execution Node Down for instance: {{ $labels.instance }}"
   - alert: SSVOperatorDown
-    expr: (ssv_node_status{instance=~"$instance.*"} + 1) or (absent(ssv_node_status{instance=~"$instance.*"}) * 0) < 2
+    expr: (ssv_node_status + 1) <2 or (absent(ssv_node_status) * 0) < 2
     for: 5m
     labels:
       severity: critical
