@@ -6,12 +6,12 @@ networks:
 
 volumes:
     tenderduty:
-    prometheus_data: 
-      external: true
+    prometheus_data: {}
+      # external: true
     grafana_data: {}
     caddy_data: {}
-    grafana-storage:
-      external: true
+    grafana-storage: {}
+      # external: true
     loki_data: {}
 
 services:
@@ -84,25 +84,25 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.44.0
-    container_name: cadvisor
-    privileged: true
-    devices:
-      - /dev/kmsg:/dev/kmsg
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker:/var/lib/docker:ro
-      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
-    restart: unless-stopped
-    expose:
-      - 8080
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+  # cadvisor:
+  #   image: gcr.io/cadvisor/cadvisor:v0.44.0
+  #   container_name: cadvisor
+  #   privileged: true
+  #   devices:
+  #     - /dev/kmsg:/dev/kmsg
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:ro
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker:/var/lib/docker:ro
+  #     #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+  #   restart: unless-stopped
+  #   expose:
+  #     - 8080
+  #   networks:
+  #     - monitor-net
+  #   labels:
+  #     org.label-schema.group: "monitoring"
 
   grafana:
     image: grafana/grafana:9.0.5
@@ -125,16 +125,16 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  pushgateway:
-    image: prom/pushgateway:v1.4.3
-    container_name: pushgateway
-    restart: unless-stopped
-    expose:
-      - 9091
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+  # pushgateway:
+  #   image: prom/pushgateway:v1.4.3
+  #   container_name: pushgateway
+  #   restart: unless-stopped
+  #   expose:
+  #     - 9091
+  #   networks:
+  #     - monitor-net
+  #   labels:
+  #     org.label-schema.group: "monitoring"
 
   caddy:
     image: caddy:2.7.6
@@ -161,72 +161,72 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  peggo_exporter:
-    image: lavender5/peggo_prometheus_exporter:master
-    container_name: peggo_exporter
-    restart: unless-stopped
-    env_file:
-      - '.env'
-    environment:
-      - POLL_SECONDS=${POLL_SECONDS}
-      - HTTP_PORT=${PEGGO_HTTP_PORT}
-      - ORCHESTRATOR_ADDRESS=${PEGGO_ORCHESTRATOR_ADDRESS}
-      - NODE_URL=${INJECTIVE_NODE_URL}
-    ports:
-      - "9910:9910"
-    networks:
-      - monitor-net
+  # peggo_exporter:
+  #   image: lavender5/peggo_prometheus_exporter:master
+  #   container_name: peggo_exporter
+  #   restart: unless-stopped
+  #   env_file:
+  #     - '.env'
+  #   environment:
+  #     - POLL_SECONDS=${POLL_SECONDS}
+  #     - HTTP_PORT=${PEGGO_HTTP_PORT}
+  #     - ORCHESTRATOR_ADDRESS=${PEGGO_ORCHESTRATOR_ADDRESS}
+  #     - NODE_URL=${INJECTIVE_NODE_URL}
+  #   ports:
+  #     - "9910:9910"
+  #   networks:
+  #     - monitor-net
 
-  tenderduty:
-    image: lavender5/tenderduty:latest
-    container_name: tenderduty
-    restart: unless-stopped
-    expose:
-      - 8888    # Dashboard
-      - 28686   # Prometheus exporter
-    volumes:
-      - 'tenderduty:/var/lib/tenderduty'
-      - './tenderduty/config.yml:/var/lib/tenderduty/config.yml'
-      - './tenderduty/chains.d:/var/lib/tenderduty/chains.d'
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-    ports:
-      - "8888:8888"
-      - "28686:28686"
-    networks:
-      - monitor-net
+  # tenderduty:
+  #   image: lavender5/tenderduty:latest
+  #   container_name: tenderduty
+  #   restart: unless-stopped
+  #   expose:
+  #     - 8888    # Dashboard
+  #     - 28686   # Prometheus exporter
+  #   volumes:
+  #     - 'tenderduty:/var/lib/tenderduty'
+  #     - './tenderduty/config.yml:/var/lib/tenderduty/config.yml'
+  #     - './tenderduty/chains.d:/var/lib/tenderduty/chains.d'
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "20m"
+  #       max-file: "10"
+  #   ports:
+  #     - "8888:8888"
+  #     - "28686:28686"
+  #   networks:
+  #     - monitor-net
 
-  aleo_exporter:
-    image: lavender5/aleo_prometheus_exporter:master
-    container_name: aleo_exporter
-    restart: unless-stopped
-    env_file:
-      - '.env'
-    environment:
-      - POLL_SECONDS=${POLL_SECONDS}
-      - HTTP_PORT=${ALEO_HTTP_PORT}
-      - NETWORK_ID=${ALEO_NETWORK_ID}
-      - NODE_URL=${ALEO_NODE_URL}
-    ports:
-      - "9911:9911"
-    networks:
-      - monitor-net
+  # aleo_exporter:
+  #   image: lavender5/aleo_prometheus_exporter:master
+  #   container_name: aleo_exporter
+  #   restart: unless-stopped
+  #   env_file:
+  #     - '.env'
+  #   environment:
+  #     - POLL_SECONDS=${POLL_SECONDS}
+  #     - HTTP_PORT=${ALEO_HTTP_PORT}
+  #     - NETWORK_ID=${ALEO_NETWORK_ID}
+  #     - NODE_URL=${ALEO_NODE_URL}
+  #   ports:
+  #     - "9911:9911"
+  #   networks:
+  #     - monitor-net
 
-  near_exporter:
-    image: lavender5/near_prometheus_exporter:latest
-    container_name: near_exporter
-    restart: unless-stopped
-    env_file:
-      - '.env'
-    command:
-      - '/bin/near_exporter'
-      - '-accountId=${NEAR_ACCOUNT_ID}'
-      - '-external-rpc=${NEAR_NODE_URL}'
-      - '-url=${NEAR_NODE_URL}'
-    ports:
-      - "9333:9333"
-    networks:
-      - monitor-net
+  # near_exporter:
+  #   image: lavender5/near_prometheus_exporter:latest
+  #   container_name: near_exporter
+  #   restart: unless-stopped
+  #   env_file:
+  #     - '.env'
+  #   command:
+  #     - '/bin/near_exporter'
+  #     - '-accountId=${NEAR_ACCOUNT_ID}'
+  #     - '-external-rpc=${NEAR_NODE_URL}'
+  #     - '-url=${NEAR_NODE_URL}'
+  #   ports:
+  #     - "9333:9333"
+  #   networks:
+  #     - monitor-net
