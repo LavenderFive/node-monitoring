@@ -24,7 +24,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 22,
+    "id": 2,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -57,7 +57,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
             },
             "description": "Current status of the beacon, ETH1 and SSV operator node",
             "fieldConfig": {
@@ -185,7 +185,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -198,7 +198,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": false,
                     "expr": "ssv_eth1_status{instance=~\"$instance.*\"}",
@@ -211,7 +211,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": false,
                     "expr": "(ssv_node_status{instance=~\"$instance.*\"} + 1) or (absent(ssv_node_status{instance=~\"$instance.*\"}) * 0)",
@@ -226,7 +226,10 @@
             "type": "gauge"
         },
         {
-            "datasource": {},
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+            },
             "description": "Health status of the beacon node",
             "fieldConfig": {
                 "defaults": {
@@ -329,7 +332,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "ssv_beacon_status{instance=~\"$instance.*\"}",
@@ -344,7 +347,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Health status of the ETH1 node",
             "fieldConfig": {
@@ -448,7 +451,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "ssv_eth1_status{instance=~\"$instance.*\"}",
@@ -463,7 +466,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Health status of the SSV operator node",
             "fieldConfig": {
@@ -560,7 +563,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "ssv_node_status{instance=~\"$instance.*\"} + 1",
@@ -573,7 +576,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "absent(ssv_node_status{instance=~\"$instance.*\"}) * 0",
@@ -619,7 +622,7 @@
             "dashes": false,
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "decimals": 2,
             "description": "RAM memory usage of the SSV operator node",
@@ -670,7 +673,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (container_memory_working_set_bytes{image!=\"\", pod=~\"$instance.*\"}) by (pod)",
@@ -721,7 +724,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Go memory usage of the SSV operator node",
             "fieldConfig": {
@@ -799,7 +802,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "go_memstats_sys_bytes{instance=~\"$instance.*\"}",
@@ -810,7 +813,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "go_memstats_heap_idle_bytes{instance=~\"$instance.*\"}",
@@ -822,7 +825,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "go_memstats_heap_inuse_bytes{instance=~\"$instance.*\"}",
@@ -834,7 +837,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "go_memstats_stack_inuse_bytes{instance=~\"$instance.*\"}",
@@ -854,7 +857,7 @@
             "dashes": false,
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Number of go routines running on the SSV operator node",
             "fieldConfig": {
@@ -913,7 +916,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "go_goroutines{instance=~\"$instance.*\"}",
@@ -963,7 +966,7 @@
             "dashes": false,
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "decimals": 3,
             "description": "CPU usage of the SSV operator node",
@@ -1021,7 +1024,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\", pod=~\"$instance.*\"}[1m])) by (pod)",
@@ -1072,7 +1075,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Hard drive memory usage of the SSV operator node",
             "fieldConfig": {
@@ -1150,7 +1153,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "((kubelet_volume_stats_used_bytes{persistentvolumeclaim=\"$instance\"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=\"$instance\"}) * 100)",
@@ -1162,7 +1165,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "kubelet_volume_stats_used_bytes{persistentvolumeclaim=\"$instance\"}",
@@ -1182,7 +1185,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Network input and output usage of the SSV operator node",
             "fieldConfig": {
@@ -1265,7 +1268,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (rate (container_network_receive_bytes_total{pod=~\"$instance.*\"}[1m])) by (pod)",
@@ -1281,7 +1284,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (rate (container_network_transmit_bytes_total{pod=~\"$instance.*\"}[1m])) by (pod)",
@@ -1299,7 +1302,7 @@
             "type": "timeseries"
         },
         {
-            "collapsed": true,
+            "collapsed": false,
             "datasource": {
                 "type": "prometheus",
                 "uid": "prometheus"
@@ -1311,820 +1314,7 @@
                 "y": 26
             },
             "id": 12,
-            "panels": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "description": "Number of connected peers to the SSV operator node",
-                    "fieldConfig": {
-                        "defaults": {
-                            "color": {
-                                "mode": "thresholds"
-                            },
-                            "mappings": [],
-                            "noValue": "No Peers",
-                            "thresholds": {
-                                "mode": "absolute",
-                                "steps": [
-                                    {
-                                        "color": "red"
-                                    },
-                                    {
-                                        "color": "#EAB839",
-                                        "value": 2
-                                    },
-                                    {
-                                        "color": "green",
-                                        "value": 3
-                                    }
-                                ]
-                            }
-                        },
-                        "overrides": []
-                    },
-                    "gridPos": {
-                        "h": 11,
-                        "w": 4,
-                        "x": 0,
-                        "y": 19
-                    },
-                    "id": 52,
-                    "options": {
-                        "colorMode": "value",
-                        "graphMode": "area",
-                        "justifyMode": "auto",
-                        "orientation": "auto",
-                        "reduceOptions": {
-                            "calcs": [
-                                "lastNotNull"
-                            ],
-                            "fields": "",
-                            "values": false
-                        },
-                        "text": {},
-                        "textMode": "auto"
-                    },
-                    "pluginVersion": "10.1.5",
-                    "targets": [
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": true,
-                            "expr": "ssv_p2p_all_connected_peers{instance=~\"$instance.*\"}",
-                            "interval": "",
-                            "legendFormat": "{{pubKey}}",
-                            "refId": "A"
-                        }
-                    ],
-                    "title": "Connected Peers",
-                    "type": "stat"
-                },
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "description": "Subnet peer distribution based on topic",
-                    "fieldConfig": {
-                        "defaults": {
-                            "color": {
-                                "mode": "palette-classic"
-                            },
-                            "custom": {
-                                "axisCenteredZero": false,
-                                "axisColorMode": "text",
-                                "axisLabel": "",
-                                "axisPlacement": "auto",
-                                "barAlignment": 0,
-                                "drawStyle": "line",
-                                "fillOpacity": 0,
-                                "gradientMode": "none",
-                                "hideFrom": {
-                                    "legend": false,
-                                    "tooltip": false,
-                                    "viz": false
-                                },
-                                "insertNulls": false,
-                                "lineInterpolation": "linear",
-                                "lineWidth": 1,
-                                "pointSize": 5,
-                                "scaleDistribution": {
-                                    "type": "linear"
-                                },
-                                "showPoints": "auto",
-                                "spanNulls": false,
-                                "stacking": {
-                                    "group": "A",
-                                    "mode": "none"
-                                },
-                                "thresholdsStyle": {
-                                    "mode": "off"
-                                }
-                            },
-                            "decimals": 0,
-                            "mappings": [],
-                            "min": 0,
-                            "thresholds": {
-                                "mode": "absolute",
-                                "steps": [
-                                    {
-                                        "color": "green"
-                                    }
-                                ]
-                            },
-                            "unit": "short"
-                        },
-                        "overrides": []
-                    },
-                    "gridPos": {
-                        "h": 11,
-                        "w": 20,
-                        "x": 4,
-                        "y": 19
-                    },
-                    "id": 57,
-                    "options": {
-                        "legend": {
-                            "calcs": [
-                                "lastNotNull",
-                                "max",
-                                "mean"
-                            ],
-                            "displayMode": "table",
-                            "placement": "right",
-                            "showLegend": true
-                        },
-                        "tooltip": {
-                            "mode": "single",
-                            "sort": "none"
-                        }
-                    },
-                    "targets": [
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": true,
-                            "expr": "ssv_p2p_connected_peers{instance=~\"$instance.*\"}",
-                            "interval": "",
-                            "legendFormat": "{{pubKey}}",
-                            "refId": "A"
-                        }
-                    ],
-                    "title": "Subnet Peers Distribution ",
-                    "type": "timeseries"
-                },
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "description": "Subnet peers breakdown table of the SSV operator node",
-                    "fieldConfig": {
-                        "defaults": {
-                            "color": {
-                                "mode": "thresholds"
-                            },
-                            "custom": {
-                                "align": "center",
-                                "cellOptions": {
-                                    "type": "color-text"
-                                },
-                                "inspect": false,
-                                "width": 150
-                            },
-                            "mappings": [],
-                            "max": 15,
-                            "min": 0,
-                            "thresholds": {
-                                "mode": "absolute",
-                                "steps": [
-                                    {
-                                        "color": "#ccccdc"
-                                    }
-                                ]
-                            }
-                        },
-                        "overrides": [
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "subnet"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.cellOptions",
-                                        "value": {
-                                            "type": "auto"
-                                        }
-                                    },
-                                    {
-                                        "id": "unit",
-                                        "value": "short"
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Value #C"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 100
-                                    },
-                                    {
-                                        "id": "thresholds",
-                                        "value": {
-                                            "mode": "absolute",
-                                            "steps": [
-                                                {
-                                                    "color": "#ccccdc"
-                                                },
-                                                {
-                                                    "color": "#ccccdc",
-                                                    "value": 1
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    {
-                                        "id": "mappings",
-                                        "value": [
-                                            {
-                                                "options": {
-                                                    "0": {
-                                                        "index": 0,
-                                                        "text": "False"
-                                                    },
-                                                    "1": {
-                                                        "index": 1,
-                                                        "text": "True"
-                                                    }
-                                                },
-                                                "type": "value"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "gridPos": {
-                        "h": 9,
-                        "w": 8,
-                        "x": 0,
-                        "y": 30
-                    },
-                    "id": 54,
-                    "options": {
-                        "cellHeight": "sm",
-                        "footer": {
-                            "countRows": false,
-                            "fields": "",
-                            "reducer": [
-                                "sum"
-                            ],
-                            "show": false
-                        },
-                        "showHeader": true,
-                        "sortBy": []
-                    },
-                    "pluginVersion": "10.1.5",
-                    "targets": [
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": false,
-                            "expr": "ssv:network:subnets:known{instance=~\"$instance.*\"}",
-                            "format": "table",
-                            "instant": true,
-                            "interval": "",
-                            "legendFormat": "",
-                            "refId": "A"
-                        },
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": false,
-                            "expr": "ssv:network:subnets:connected{instance=~\"$instance.*\"}",
-                            "format": "table",
-                            "hide": false,
-                            "instant": true,
-                            "interval": "",
-                            "legendFormat": "",
-                            "refId": "B"
-                        },
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": false,
-                            "expr": "ssv:network:subnets:my{instance=~\"$instance.*\"}",
-                            "format": "table",
-                            "hide": false,
-                            "instant": true,
-                            "interval": "",
-                            "legendFormat": "",
-                            "refId": "C"
-                        }
-                    ],
-                    "title": "Subnets Peers Count",
-                    "transformations": [
-                        {
-                            "id": "seriesToColumns",
-                            "options": {
-                                "byField": "subnet"
-                            }
-                        },
-                        {
-                            "id": "organize",
-                            "options": {
-                                "excludeByName": {
-                                    "Time 1": true,
-                                    "Time 2": true,
-                                    "Time 3": true,
-                                    "Value #C": false,
-                                    "__name__ 1": true,
-                                    "__name__ 2": true,
-                                    "__name__ 3": true,
-                                    "instance 1": true,
-                                    "instance 2": true,
-                                    "instance 3": true,
-                                    "job 1": true,
-                                    "job 2": true,
-                                    "job 3": true
-                                },
-                                "indexByName": {
-                                    "Time 1": 2,
-                                    "Time 2": 7,
-                                    "Time 3": 12,
-                                    "Value #A": 6,
-                                    "Value #B": 11,
-                                    "Value #C": 1,
-                                    "__name__ 1": 3,
-                                    "__name__ 2": 8,
-                                    "__name__ 3": 13,
-                                    "instance 1": 4,
-                                    "instance 2": 9,
-                                    "instance 3": 14,
-                                    "job 1": 5,
-                                    "job 2": 10,
-                                    "job 3": 15,
-                                    "subnet": 0
-                                },
-                                "renameByName": {
-                                    "Time 2": "",
-                                    "Value #A": "Known Peers (DHT)",
-                                    "Value #B": "Connected Peers",
-                                    "Value #C": "Subscribed",
-                                    "__name__ 3": "",
-                                    "subnet": "Subnet"
-                                }
-                            }
-                        }
-                    ],
-                    "type": "table"
-                },
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "description": "The discovery rate of the subnet peers.\nFound is rate per second of nodes that were found with discovery. Rejected is rate per second of nodes that were found with discovery but rejected because of limit or subnet",
-                    "fieldConfig": {
-                        "defaults": {
-                            "color": {
-                                "mode": "palette-classic"
-                            },
-                            "custom": {
-                                "axisCenteredZero": false,
-                                "axisColorMode": "text",
-                                "axisLabel": "",
-                                "axisPlacement": "auto",
-                                "barAlignment": 0,
-                                "drawStyle": "line",
-                                "fillOpacity": 0,
-                                "gradientMode": "none",
-                                "hideFrom": {
-                                    "legend": false,
-                                    "tooltip": false,
-                                    "viz": false
-                                },
-                                "insertNulls": false,
-                                "lineInterpolation": "linear",
-                                "lineWidth": 1,
-                                "pointSize": 5,
-                                "scaleDistribution": {
-                                    "type": "linear"
-                                },
-                                "showPoints": "auto",
-                                "spanNulls": false,
-                                "stacking": {
-                                    "group": "A",
-                                    "mode": "none"
-                                },
-                                "thresholdsStyle": {
-                                    "mode": "off"
-                                }
-                            },
-                            "mappings": [],
-                            "thresholds": {
-                                "mode": "absolute",
-                                "steps": [
-                                    {
-                                        "color": "green"
-                                    },
-                                    {
-                                        "color": "red",
-                                        "value": 80
-                                    }
-                                ]
-                            }
-                        },
-                        "overrides": []
-                    },
-                    "gridPos": {
-                        "h": 9,
-                        "w": 16,
-                        "x": 8,
-                        "y": 30
-                    },
-                    "id": 59,
-                    "options": {
-                        "legend": {
-                            "calcs": [],
-                            "displayMode": "list",
-                            "placement": "bottom",
-                            "showLegend": true
-                        },
-                        "tooltip": {
-                            "mode": "single",
-                            "sort": "none"
-                        }
-                    },
-                    "targets": [
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": true,
-                            "expr": "rate(ssv:network:discovery:found{instance=~\"$instance.*\"}[5m])",
-                            "interval": "",
-                            "legendFormat": "Found",
-                            "refId": "A"
-                        },
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": true,
-                            "expr": "rate(ssv:network:discovery:rejected{instance=~\"$instance.*\"}[5m])",
-                            "hide": false,
-                            "interval": "",
-                            "legendFormat": "Rejected",
-                            "refId": "B"
-                        }
-                    ],
-                    "title": "Peers Discovery Rate",
-                    "type": "timeseries"
-                },
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "description": "Table breakdown of all the SSV operator nodes",
-                    "fieldConfig": {
-                        "defaults": {
-                            "color": {
-                                "mode": "thresholds"
-                            },
-                            "custom": {
-                                "align": "center",
-                                "cellOptions": {
-                                    "type": "auto"
-                                },
-                                "filterable": true,
-                                "inspect": false
-                            },
-                            "mappings": [],
-                            "thresholds": {
-                                "mode": "absolute",
-                                "steps": [
-                                    {
-                                        "color": "green"
-                                    }
-                                ]
-                            },
-                            "unit": "index"
-                        },
-                        "overrides": [
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Index (last)"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 83
-                                    },
-                                    {
-                                        "id": "displayName",
-                                        "value": "Operator Id's"
-                                    },
-                                    {
-                                        "id": "unit",
-                                        "value": "short"
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Last Seen (last)"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 189
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Name (last)"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 159
-                                    },
-                                    {
-                                        "id": "displayName",
-                                        "value": "Name"
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Node Version (last)"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 153
-                                    },
-                                    {
-                                        "id": "displayName",
-                                        "value": "Node Version"
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Node Type (last)"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 159
-                                    },
-                                    {
-                                        "id": "displayName",
-                                        "value": "Node Type"
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Peer ID (last)"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "displayName",
-                                        "value": "Peer ID"
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Last Seen (last)"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "displayName",
-                                        "value": "Last Seen"
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Operator Id's"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 137
-                                    }
-                                ]
-                            },
-                            {
-                                "matcher": {
-                                    "id": "byName",
-                                    "options": "Peer ID"
-                                },
-                                "properties": [
-                                    {
-                                        "id": "custom.width",
-                                        "value": 841
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "gridPos": {
-                        "h": 13,
-                        "w": 24,
-                        "x": 0,
-                        "y": 39
-                    },
-                    "id": 64,
-                    "options": {
-                        "cellHeight": "sm",
-                        "footer": {
-                            "countRows": false,
-                            "fields": "",
-                            "reducer": [
-                                "sum"
-                            ],
-                            "show": false
-                        },
-                        "frameIndex": 1,
-                        "showHeader": true,
-                        "sortBy": []
-                    },
-                    "pluginVersion": "10.1.5",
-                    "targets": [
-                        {
-                            "datasource": {
-                                "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
-                            },
-                            "exemplar": true,
-                            "expr": "rate(ssv:network:peers_identity{instance=~\"$instance.*\"}[5m])",
-                            "format": "table",
-                            "hide": false,
-                            "instant": false,
-                            "interval": "",
-                            "legendFormat": "",
-                            "refId": "A"
-                        }
-                    ],
-                    "title": "Node Info",
-                    "transformations": [
-                        {
-                            "id": "organize",
-                            "options": {
-                                "excludeByName": {
-                                    "Time 1": false,
-                                    "Time 2": true,
-                                    "Value": true,
-                                    "Value #A": true,
-                                    "Value #B": false,
-                                    "__name__": true,
-                                    "__name__ 1": true,
-                                    "__name__ 2": true,
-                                    "instance": true,
-                                    "instance 1": true,
-                                    "instance 2": true,
-                                    "job": true,
-                                    "job 1": true,
-                                    "job 2": true,
-                                    "pubKey": true
-                                },
-                                "indexByName": {
-                                    "Time": 6,
-                                    "Value": 9,
-                                    "instance": 7,
-                                    "job": 8,
-                                    "operatorID": 0,
-                                    "operatorName": 1,
-                                    "pid": 5,
-                                    "pubKey": 4,
-                                    "type": 3,
-                                    "v": 2
-                                },
-                                "renameByName": {
-                                    "Time": "Last Seen",
-                                    "Time 1": "Last Seen",
-                                    "Time 2": "",
-                                    "Value #B": "Index",
-                                    "__name__ 1": "",
-                                    "job 2": "",
-                                    "name": "Name",
-                                    "operatorID": "Index",
-                                    "operatorName": "Name",
-                                    "pid": "Peer ID",
-                                    "pubKey": "Public Key (Hash)",
-                                    "type": "Node Type",
-                                    "v": "Node Version"
-                                }
-                            }
-                        },
-                        {
-                            "id": "groupBy",
-                            "options": {
-                                "fields": {
-                                    "Index": {
-                                        "aggregations": [
-                                            "last"
-                                        ],
-                                        "operation": "aggregate"
-                                    },
-                                    "Last Seen": {
-                                        "aggregations": [
-                                            "last"
-                                        ],
-                                        "operation": "aggregate"
-                                    },
-                                    "Name": {
-                                        "aggregations": [
-                                            "last"
-                                        ],
-                                        "operation": "aggregate"
-                                    },
-                                    "Node Type": {
-                                        "aggregations": [
-                                            "last"
-                                        ],
-                                        "operation": "aggregate"
-                                    },
-                                    "Node Version": {
-                                        "aggregations": [
-                                            "last"
-                                        ],
-                                        "operation": "aggregate"
-                                    },
-                                    "Peer ID": {
-                                        "aggregations": [
-                                            "last"
-                                        ],
-                                        "operation": "groupby"
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            "id": "organize",
-                            "options": {
-                                "excludeByName": {},
-                                "indexByName": {
-                                    "Index (last)": 1,
-                                    "Last Seen (last)": 5,
-                                    "Name (last)": 0,
-                                    "Node Type (last)": 3,
-                                    "Node Version (last)": 2,
-                                    "Peer ID": 4
-                                },
-                                "renameByName": {}
-                            }
-                        },
-                        {
-                            "id": "sortBy",
-                            "options": {
-                                "fields": {},
-                                "sort": [
-                                    {
-                                        "field": "Index (last)"
-                                    }
-                                ]
-                            }
-                        }
-                    ],
-                    "type": "table"
-                }
-            ],
+            "panels": [],
             "targets": [
                 {
                     "datasource": {
@@ -2138,6 +1328,808 @@
             "type": "row"
         },
         {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+            },
+            "description": "Number of connected peers to the SSV operator node",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "noValue": "No Peers",
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 2
+                            },
+                            {
+                                "color": "green",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 4,
+                "x": 0,
+                "y": 27
+            },
+            "id": 52,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "9.0.5",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": true,
+                    "expr": "ssv_p2p_all_connected_peers{instance=~\"$instance.*\"}",
+                    "interval": "",
+                    "legendFormat": "{{pubKey}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Connected Peers",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+            },
+            "description": "Subnet peer distribution based on topic",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "decimals": 0,
+                    "mappings": [],
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 20,
+                "x": 4,
+                "y": 27
+            },
+            "id": 57,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "lastNotNull",
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": true,
+                    "expr": "ssv_p2p_connected_peers{instance=~\"$instance.*\"}",
+                    "interval": "",
+                    "legendFormat": "{{pubKey}}",
+                    "refId": "A"
+                }
+            ],
+            "title": "Subnet Peers Distribution ",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+            },
+            "description": "Subnet peers breakdown table of the SSV operator node",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "center",
+                        "displayMode": "auto",
+                        "inspect": false,
+                        "width": 150
+                    },
+                    "mappings": [],
+                    "max": 15,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "#ccccdc",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "subnet"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "short"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Value #C"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 100
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "#ccccdc",
+                                            "value": null
+                                        },
+                                        {
+                                            "color": "#ccccdc",
+                                            "value": 1
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "options": {
+                                            "0": {
+                                                "index": 0,
+                                                "text": "False"
+                                            },
+                                            "1": {
+                                                "index": 1,
+                                                "text": "True"
+                                            }
+                                        },
+                                        "type": "value"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 0,
+                "y": 38
+            },
+            "id": 54,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "9.0.5",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": false,
+                    "expr": "ssv:network:subnets:known{instance=~\"$instance.*\"}",
+                    "format": "table",
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "A"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": false,
+                    "expr": "ssv:network:subnets:connected{instance=~\"$instance.*\"}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "B"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": false,
+                    "expr": "ssv:network:subnets:my{instance=~\"$instance.*\"}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "C"
+                }
+            ],
+            "title": "Subnets Peers Count",
+            "transformations": [
+                {
+                    "id": "seriesToColumns",
+                    "options": {
+                        "byField": "subnet"
+                    }
+                },
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time 1": true,
+                            "Time 2": true,
+                            "Time 3": true,
+                            "Value #C": false,
+                            "__name__ 1": true,
+                            "__name__ 2": true,
+                            "__name__ 3": true,
+                            "instance 1": true,
+                            "instance 2": true,
+                            "instance 3": true,
+                            "job 1": true,
+                            "job 2": true,
+                            "job 3": true
+                        },
+                        "indexByName": {
+                            "Time 1": 2,
+                            "Time 2": 7,
+                            "Time 3": 12,
+                            "Value #A": 6,
+                            "Value #B": 11,
+                            "Value #C": 1,
+                            "__name__ 1": 3,
+                            "__name__ 2": 8,
+                            "__name__ 3": 13,
+                            "instance 1": 4,
+                            "instance 2": 9,
+                            "instance 3": 14,
+                            "job 1": 5,
+                            "job 2": 10,
+                            "job 3": 15,
+                            "subnet": 0
+                        },
+                        "renameByName": {
+                            "Time 2": "",
+                            "Value #A": "Known Peers (DHT)",
+                            "Value #B": "Connected Peers",
+                            "Value #C": "Subscribed",
+                            "__name__ 3": "",
+                            "subnet": "Subnet"
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+            },
+            "description": "The discovery rate of the subnet peers.\nFound is rate per second of nodes that were found with discovery. Rejected is rate per second of nodes that were found with discovery but rejected because of limit or subnet",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 16,
+                "x": 8,
+                "y": 38
+            },
+            "id": 59,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": true,
+                    "expr": "rate(ssv:network:discovery:found{instance=~\"$instance.*\"}[5m])",
+                    "interval": "",
+                    "legendFormat": "Found",
+                    "refId": "A"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": true,
+                    "expr": "rate(ssv:network:discovery:rejected{instance=~\"$instance.*\"}[5m])",
+                    "hide": false,
+                    "interval": "",
+                    "legendFormat": "Rejected",
+                    "refId": "B"
+                }
+            ],
+            "title": "Peers Discovery Rate",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+            },
+            "description": "Table breakdown of all the SSV operator nodes",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "center",
+                        "displayMode": "auto",
+                        "filterable": true,
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "index"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Index (last)"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 83
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "Operator Id's"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "short"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Last Seen (last)"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 189
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Name (last)"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 159
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "Name"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Node Version (last)"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 153
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "Node Version"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Node Type (last)"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 159
+                            },
+                            {
+                                "id": "displayName",
+                                "value": "Node Type"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Peer ID (last)"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Peer ID"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Last Seen (last)"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Last Seen"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Operator Id's"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 137
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Peer ID"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 841
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 13,
+                "w": 24,
+                "x": 0,
+                "y": 47
+            },
+            "id": 64,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "frameIndex": 1,
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "9.0.5",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${datasource}"
+                    },
+                    "exemplar": true,
+                    "expr": "rate(ssv:network:peers_identity{instance=~\"$instance.*\"}[5m])",
+                    "format": "table",
+                    "hide": false,
+                    "instant": false,
+                    "interval": "",
+                    "legendFormat": "",
+                    "refId": "A"
+                }
+            ],
+            "title": "Node Info",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time 1": false,
+                            "Time 2": true,
+                            "Value": true,
+                            "Value #A": true,
+                            "Value #B": false,
+                            "__name__": true,
+                            "__name__ 1": true,
+                            "__name__ 2": true,
+                            "instance": true,
+                            "instance 1": true,
+                            "instance 2": true,
+                            "job": true,
+                            "job 1": true,
+                            "job 2": true,
+                            "pubKey": true
+                        },
+                        "indexByName": {
+                            "Time": 6,
+                            "Value": 9,
+                            "instance": 7,
+                            "job": 8,
+                            "operatorID": 0,
+                            "operatorName": 1,
+                            "pid": 5,
+                            "pubKey": 4,
+                            "type": 3,
+                            "v": 2
+                        },
+                        "renameByName": {
+                            "Time": "Last Seen",
+                            "Time 1": "Last Seen",
+                            "Time 2": "",
+                            "Value #B": "Index",
+                            "__name__ 1": "",
+                            "job 2": "",
+                            "name": "Name",
+                            "operatorID": "Index",
+                            "operatorName": "Name",
+                            "pid": "Peer ID",
+                            "pubKey": "Public Key (Hash)",
+                            "type": "Node Type",
+                            "v": "Node Version"
+                        }
+                    }
+                },
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Index": {
+                                "aggregations": [
+                                    "last"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Last Seen": {
+                                "aggregations": [
+                                    "last"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Name": {
+                                "aggregations": [
+                                    "last"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Node Type": {
+                                "aggregations": [
+                                    "last"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Node Version": {
+                                "aggregations": [
+                                    "last"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Peer ID": {
+                                "aggregations": [
+                                    "last"
+                                ],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {},
+                        "indexByName": {
+                            "Index (last)": 1,
+                            "Last Seen (last)": 5,
+                            "Name (last)": 0,
+                            "Node Type (last)": 3,
+                            "Node Version (last)": 2,
+                            "Peer ID": 4
+                        },
+                        "renameByName": {}
+                    }
+                },
+                {
+                    "id": "sortBy",
+                    "options": {
+                        "fields": {},
+                        "sort": [
+                            {
+                                "field": "Index (last)"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
             "collapsed": false,
             "datasource": {
                 "type": "prometheus",
@@ -2147,7 +2139,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 27
+                "y": 60
             },
             "id": 2,
             "panels": [],
@@ -2166,7 +2158,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Rate per second of inbound / outbound topic messages over the last 5 minutes",
             "fieldConfig": {
@@ -2208,7 +2200,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "#EAB839",
@@ -2223,7 +2216,7 @@
                 "h": 12,
                 "w": 8,
                 "x": 0,
-                "y": 28
+                "y": 61
             },
             "id": 32,
             "options": {
@@ -2243,7 +2236,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "editorMode": "code",
                     "exemplar": true,
@@ -2257,7 +2250,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (rate(ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\", msg_type=\"0\"}[5m]))",
@@ -2271,7 +2264,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (rate(ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\", msg_type=\"1\"}[5m]))",
@@ -2285,7 +2278,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (rate(ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\", msg_type=\"2\"}[5m]))",
@@ -2299,7 +2292,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "sum (rate(ssv:p2p:pubsub:msg:out{instance=~\"$instance.*\"}[5m]))",
@@ -2317,7 +2310,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Rate per second of incoming topic messages for every topic over the last 5 minutes",
             "fieldConfig": {
@@ -2359,7 +2352,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -2375,7 +2369,7 @@
                 "h": 12,
                 "w": 8,
                 "x": 8,
-                "y": 28
+                "y": 61
             },
             "id": 34,
             "options": {
@@ -2398,7 +2392,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "rate (ssv:p2p:pubsub:msg:in{instance=~\"$instance.*\"}[5m])",
@@ -2413,7 +2407,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Rate per second of outgoing topic messages for every topic over the last 5 minutes.\nResponses are outgoing, for incoming requests.\nSuccessful Requests are outgoing.\nActive are outgoing requests.",
             "fieldConfig": {
@@ -2454,7 +2448,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -2470,7 +2465,7 @@
                 "h": 12,
                 "w": 8,
                 "x": 16,
-                "y": 28
+                "y": 61
             },
             "id": 36,
             "options": {
@@ -2493,7 +2488,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "rate (ssv:p2p:pubsub:msg:out{instance=~\"$instance.*\"}[5m])",
@@ -2508,7 +2503,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Table breakdown for each stream protocol.\nResponses are outgoing, for incoming requests.\nSuccessful Requests are outgoing.\nActive Requests are outgoing.",
             "fieldConfig": {
@@ -2526,7 +2521,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             }
                         ]
                     }
@@ -2562,7 +2558,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 40
+                "y": 73
             },
             "id": 61,
             "options": {
@@ -2583,7 +2579,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": false,
                     "expr": "ssv:p2p:streams:res{instance=~\"$instance.*\"}",
@@ -2596,7 +2592,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": false,
                     "expr": "ssv:p2p:streams:req:count{instance=~\"$instance.*\"}",
@@ -2610,7 +2606,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": false,
                     "expr": "ssv:p2p:streams:req:success{instance=~\"$instance.*\"}",
@@ -2624,7 +2620,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": false,
                     "expr": "ssv:p2p:streams:req:active{instance=~\"$instance.*\"}",
@@ -2681,7 +2677,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Rate per second of requests,  responses and active requests.\nResponses are outgoing, for incoming requests.\nSuccessful Requests are outgoing.\nActive are outgoing requests.",
             "fieldConfig": {
@@ -2722,7 +2718,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             }
                         ]
                     }
@@ -2733,7 +2730,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 40
+                "y": 73
             },
             "id": 63,
             "options": {
@@ -2753,7 +2750,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "rate(ssv:p2p:streams:res{instance=~\"$instance.*\"}[5m])",
@@ -2766,7 +2763,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "rate(ssv:p2p:streams:req:count{instance=~\"$instance.*\"}[5m])",
@@ -2780,7 +2777,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "rate(ssv:p2p:streams:req:success{instance=~\"$instance.*\"}[5m])",
@@ -2794,7 +2791,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "exemplar": true,
                     "expr": "rate(ssv:p2p:streams:req:active{instance=~\"$instance.*\"}[5m])",
@@ -2816,7 +2813,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 48
+                "y": 81
             },
             "id": 67,
             "panels": [],
@@ -2826,7 +2823,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "fieldConfig": {
                 "defaults": {
@@ -2866,7 +2863,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -2881,7 +2879,7 @@
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 49
+                "y": 82
             },
             "id": 65,
             "options": {
@@ -2900,7 +2898,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "editorMode": "code",
                     "expr": "increase(ssv_messages_received_total{instance=~\"$instance\"}[2m])",
@@ -2916,7 +2914,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "${datasource}"
             },
             "description": "Number of message received from each of the connected peer",
             "fieldConfig": {
@@ -2957,7 +2955,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -2972,7 +2971,7 @@
                 "h": 9,
                 "w": 24,
                 "x": 0,
-                "y": 57
+                "y": 90
             },
             "id": 66,
             "options": {
@@ -2995,7 +2994,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "${datasource}"
                     },
                     "editorMode": "code",
                     "expr": "increase(ssv_messages_received_from_peer{instance=~\"$instance\"}[2m])",
@@ -3073,6 +3072,6 @@
     "timezone": "",
     "title": "Node Dashboard",
     "uid": "node_dashboard",
-    "version": 4,
+    "version": 2,
     "weekStart": ""
 }
