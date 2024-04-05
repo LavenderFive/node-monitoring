@@ -310,7 +310,7 @@ groups:
     annotations:
       summary: "SSV <> ETH Execution Node Down for instance: {{ $labels.instance }}"
   - alert: SSVOperatorDown
-    expr: (ssv_node_status + 1) <2 or (absent(ssv_node_status) * 0) < 2
+    expr: (ssv_node_status + 1) < 2 or (absent(ssv_node_status) * 0) < 2
     for: 5m
     labels:
       severity: critical
@@ -330,3 +330,10 @@ groups:
       severity: critical
     annotations:
       summary: "SSV Failed Submissions too high for instance: {{ $labels.instance }}"
+  - alert: SSVFailedProposal
+    expr: increase(ssv_validator_roles_failed{role="PROPOSER"}[5m]) > 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "SSV Failed Proposal Submission, likely config error for instance: {{ $labels.instance }}"
