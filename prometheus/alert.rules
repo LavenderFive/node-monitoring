@@ -207,9 +207,9 @@ groups:
         description: 'Pool is below the current seat price'
     - alert: NearBlockNumberNotIncreasing
       expr: increase(near_block_number[5m]) <= 0
-      for: 5m
+      for: 1m
       labels:
-        severity: warning
+        severity: critical
         job: near
       annotations:
         summary: "Near Block Number Not Increasing"
