@@ -10,18 +10,24 @@ groups:
     annotations:
       summary: "Aptos Node Down"
       description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
+- alert: AptosInstanceDown
+  expr: up{job="aptos"} == 0
+  for: 3m
+  annotations:
+    title: 'Instance {{ $labels.instance }} down'
+    description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
+  labels:
+    severity: 'critical'
+    job: aptos
 
 - name: Node/server alerts
   rules:
   - alert: InstanceDown
-    # Condition for alerting
     expr: up == 0
     for: 3m
-    # Annotation - additional informational labels to store more information
     annotations:
       title: 'Instance {{ $labels.instance }} down'
       description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
-    # Labels - additional labels to be attached to the alert
     labels:
       severity: 'critical'
 
@@ -337,3 +343,22 @@ groups:
       severity: warning
     annotations:
       summary: "SSV Failed Proposal Submission, likely config error for instance: {{ $labels.instance }}"
+  - alert: SSVInstanceDown
+    expr: up{job="ssv"} == 0
+    for: 3m
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
+    labels:
+      severity: 'critical'
+
+- name: Stakewise
+  rules:
+  - alert: StakewiseInstanceDown
+    expr: up{job="stakewise"} == 0
+    for: 3m
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
+    labels:
+      severity: 'critical'
