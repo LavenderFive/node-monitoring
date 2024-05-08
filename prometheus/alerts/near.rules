@@ -39,3 +39,11 @@ groups:
       annotations:
         summary: "Near Chunks Produced Not Increasing"
         description: "The near_epoch_chunks_produced_number has not increased in the last 5 minutes."
+    - alert: NearDown
+        expr: up{job="near"} == 0
+        for: 3m
+        annotations:
+        title: 'Instance {{ $labels.instance }} down'
+        description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
+        labels:
+        severity: 'critical'

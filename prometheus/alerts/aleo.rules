@@ -1,6 +1,14 @@
 groups:
 - name: aleo
   rules:
+  - alert: AleoDown
+    expr: up{job="aleo"} == 0
+    for: 3m
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
+    labels:
+      severity: 'critical'
   - alert: AleoLatestHeightNotIncreasing
     expr: increase(aleo_latest_height[5m]) <= 0
     for: 5m

@@ -13,3 +13,12 @@ groups:
     annotations:
       summary: "High penalty rate on validator"
       description: "Validator {{ $labels.validator }} has a penalty rate greater than 25 percent."
+
+  - alert: SeiPriceFeederDown
+    expr: up{job="sei-price-feeder"} == 0
+    for: 3m
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
+    labels:
+      severity: 'critical'
