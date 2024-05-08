@@ -8,7 +8,7 @@ groups:
       title: 'Instance {{ $labels.instance }} down'
       description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
     labels:
-      severity: 'critical'
+      severity: 'warning'
 
   - alert: NodeFilesystemReadonly
     expr: node_filesystem_readonly{fstype!~"rootfs|nfs4"} > 0
@@ -83,13 +83,13 @@ groups:
       description: 'Node memory is filling up < 10% left\n  VALUE = {{ $value }}\n LABELS: {{ $labels.instance }}'
 
   - alert: NodeHighCPULoad
-    expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80
+    expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 90
     for: 0m
     labels:
       severity: warning
       service: node_exporter
     annotations:
-      description: 'CPU load is > 80%\n  VALUE = {{ $value }}\n LABELS: {{ $labels.instance }}'
+      description: 'CPU load is > 90%\n  VALUE = {{ $value }}\n LABELS: {{ $labels.instance }}'
 
   - alert: NodeTimeOutOfSync
     expr: node_timex_sync_status{} != 1
