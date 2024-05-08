@@ -1,15 +1,23 @@
 global:
-  scrape_interval:     15s
+  scrape_interval: 15s
   evaluation_interval: 15s
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: 'docker-host-alpha'
+    monitor: "docker-host-alpha"
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
   - "alert.rules"
+  - "alerts/aleo.rules"
+  - "alerts/aptos.rules"
+  - "alerts/cosmos.rules"
+  - "alerts/dwallet.rules"
+  - "alerts/ethereum.rules"
+  - "alerts/near.rules"
+  - "alerts/peggo.rules"
+  - "alerts/sei.rules"
 
 scrape_config_files:
   - /etc/prometheus/servers/*.yml
@@ -18,44 +26,51 @@ scrape_config_files:
 
 # A scrape configuration containing exactly one endpoint to scrape.
 scrape_configs:
-  - job_name: 'cadvisor'
+  - job_name: "cadvisor"
     scrape_interval: 5s
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: ["cadvisor:8080"]
 
-  - job_name: 'prometheus'
+  - job_name: "prometheus"
     scrape_interval: 10s
     static_configs:
-      - targets: ['prometheus:9090']
+      - targets: ["prometheus:9090"]
 
-  - job_name: 'pushgateway'
+  - job_name: "pushgateway"
     scrape_interval: 10s
     honor_labels: true
     static_configs:
-      - targets: ['pushgateway:9091']
+      - targets: ["pushgateway:9091"]
+
+  - job_name: "dwallet"
+    static_configs:
+      - targets: ["NODE_IP:9184", "NODE_IP:9100"]
+        labels:
+          chain: "dwallet"
+          validator: "validator"
 
   - job_name: ssv
     metrics_path: /metrics
     static_configs:
       - targets:
-        # change the targets according to your setup
-        # - <container_name>:15000
-        - ssv-node-1:15000
-        - ssv-node-2:15000
-        - ssv-node-3:15000
-        - ssv-node-4:15000
+          # change the targets according to your setup
+          # - <container_name>:15000
+          - ssv-node-1:15000
+          - ssv-node-2:15000
+          - ssv-node-3:15000
+          - ssv-node-4:15000
   - job_name: ssv_health
     metrics_path: /health
     static_configs:
       - targets:
-        - ssv-node-1:15000
-        - ssv-node-2:15000
-        - ssv-node-3:15000
-        - ssv-node-4:15000
+          - ssv-node-1:15000
+          - ssv-node-2:15000
+          - ssv-node-3:15000
+          - ssv-node-4:15000
 
 alerting:
   alertmanagers:
-  - scheme: http
-    static_configs:
-    - targets: 
-      - 'alertmanager:9093'
+    - scheme: http
+      static_configs:
+        - targets:
+            - "alertmanager:9093"

@@ -1,0 +1,36 @@
+groups:
+
+- name: peggo
+  rules:
+  - alert: HighNonceDifference
+    expr: |
+      abs(peggo_network_nonce - peggo_orchestrator_nonce) > 5 
+      and 
+      changes(peggo_orchestrator_nonce[15m]) <= 0
+    for: 15m
+    labels:
+      severity: critical
+      job: peggo
+    annotations:
+      summary: "High difference between peggo_orchestrator_nonce and peggo_network_nonce"
+      description: "The difference between peggo_orchestrator_nonce and peggo_network_nonce has been greater than 5 for more than 15 minutes."
+
+  - alert: LowOrchestratorBalance
+    expr: peggo_orchestrator_balance <= 0.05
+    for: 15m
+    labels:
+      severity: critical
+      job: peggo
+    annotations:
+      summary: "Orchestrator balance is low"
+      description: "Refill orchestrator wallet."
+
+  - alert: PeggoServiceDown
+    expr: node_systemd_unit_state{name="peggo.service", state="active"} == 0
+    for: 15m
+    labels:
+      severity: critical
+      job: peggo
+    annotations:
+      summary: "Peggo is down"
+      description: "The systemd service 'peggo.service' has been down for more than 15 minutes."

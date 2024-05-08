@@ -1,0 +1,10 @@
+groups:
+- name: aleo
+  rules:
+  - alert: AleoLatestHeightNotIncreasing
+    expr: increase(aleo_latest_height[5m]) <= 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Aleo latest height has not increased in the last 5 minutes"

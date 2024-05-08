@@ -1,0 +1,21 @@
+groups:
+- name: aptos
+  rules:
+  - alert: AptosNodeDown
+    expr: avg by(instance) (increase(aptos_state_sync_version{chain="mainnet", type="synced"}[1m])) < 1
+    for: 1m
+    labels:
+      severity: critical
+      job: aptos
+    annotations:
+      summary: "Aptos Node Down"
+      description: "Service {{ $labels.job }} {{ $labels.chain }} is not syncing."
+- alert: AptosInstanceDown
+  expr: up{job="aptos"} == 0
+  for: 3m
+  annotations:
+    title: 'Instance {{ $labels.instance }} down'
+    description: '{{ $labels.job }} on {{ $labels.instance }} has been down for more than 3 minutes'
+  labels:
+    severity: 'critical'
+    job: aptos

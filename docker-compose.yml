@@ -5,12 +5,12 @@ networks:
     driver: bridge
 
 volumes:
-    tenderduty:
-    prometheus_data: {}
-    grafana_data: {}
-    caddy_data: {}
-    grafana-storage: {}
-    loki_data: {}
+  tenderduty:
+  prometheus_data: {}
+  grafana_data: {}
+  caddy_data: {}
+  grafana-storage: {}
+  loki_data: {}
 
 services:
   loki:
@@ -103,7 +103,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:9.0.5
+    image: grafana/grafana:10.4.2
     env_file:
       - '.env'
     container_name: grafana
@@ -222,7 +222,6 @@ services:
     command:
       - '/bin/near_exporter'
       - '-accountId=${NEAR_ACCOUNT_ID}'
-      - '-external-rpc=${NEAR_NODE_URL}'
       - '-url=${NEAR_NODE_URL}'
     ports:
       - "9333:9333"
