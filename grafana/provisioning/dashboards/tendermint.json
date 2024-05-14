@@ -1,77 +1,4 @@
 {
-    "__inputs": [
-        {
-            "name": "DS_PROMETHEUS",
-            "label": "Prometheus",
-            "description": "",
-            "type": "datasource",
-            "pluginId": "prometheus",
-            "pluginName": "Prometheus"
-        }
-    ],
-    "__elements": {},
-    "__requires": [
-        {
-            "type": "panel",
-            "id": "bargauge",
-            "name": "Bar gauge",
-            "version": ""
-        },
-        {
-            "type": "panel",
-            "id": "gauge",
-            "name": "Gauge",
-            "version": ""
-        },
-        {
-            "type": "grafana",
-            "id": "grafana",
-            "name": "Grafana",
-            "version": "10.4.2"
-        },
-        {
-            "type": "panel",
-            "id": "graph",
-            "name": "Graph (old)",
-            "version": ""
-        },
-        {
-            "type": "datasource",
-            "id": "prometheus",
-            "name": "Prometheus",
-            "version": "1.0.0"
-        },
-        {
-            "type": "panel",
-            "id": "stat",
-            "name": "Stat",
-            "version": ""
-        },
-        {
-            "type": "panel",
-            "id": "table",
-            "name": "Table",
-            "version": ""
-        },
-        {
-            "type": "panel",
-            "id": "table-old",
-            "name": "Table (old)",
-            "version": ""
-        },
-        {
-            "type": "panel",
-            "id": "text",
-            "name": "Text",
-            "version": ""
-        },
-        {
-            "type": "panel",
-            "id": "timeseries",
-            "name": "Time series",
-            "version": ""
-        }
-    ],
     "annotations": {
         "list": [
             {
@@ -99,10 +26,428 @@
     "fiscalYearStartMonth": 0,
     "gnetId": 15991,
     "graphTooltip": 0,
-    "id": null,
+    "id": 100,
     "links": [],
     "liveNow": false,
     "panels": [
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 103,
+            "panels": [],
+            "title": "Node Health",
+            "type": "row"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 6,
+                "x": 0,
+                "y": 1
+            },
+            "id": 110,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "10.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "code",
+                    "expr": "tendermint_consensus_height{chain_id=\"$chain_id\",type=\"master\"}",
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Master Node Block Height",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 7,
+                "x": 6,
+                "y": 1
+            },
+            "id": 111,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "10.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "code",
+                    "expr": "tendermint_consensus_height{chain_id=\"$chain_id\",type=\"relayer\"}",
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Relayer Node Block Height",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 11,
+                "x": 13,
+                "y": 1
+            },
+            "id": 112,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "10.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "code",
+                    "expr": "tendermint_consensus_height{chain_id=\"$chain_id\",type=\"api\"}",
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "API Node Block Height",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 1,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "unit": "bool"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 6,
+                "x": 0,
+                "y": 5
+            },
+            "id": 107,
+            "options": {
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto"
+            },
+            "pluginVersion": "10.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "builder",
+                    "exemplar": true,
+                    "expr": "tendermint_consensus_state_syncing{chain_id=\"$chain_id\",type=\"master\"}",
+                    "interval": "",
+                    "legendFormat": "",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Master Syncing",
+            "type": "gauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 1,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "unit": "bool"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 7,
+                "x": 6,
+                "y": 5
+            },
+            "id": 108,
+            "options": {
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto"
+            },
+            "pluginVersion": "10.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "tendermint_consensus_state_syncing{chain_id=\"$chain_id\",type=\"relayer\"}",
+                    "interval": "",
+                    "legendFormat": "",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Relayer Syncing",
+            "type": "gauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 1,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    "unit": "bool"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 11,
+                "x": 13,
+                "y": 5
+            },
+            "id": 109,
+            "options": {
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": false,
+                "sizing": "auto"
+            },
+            "pluginVersion": "10.4.2",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "tendermint_consensus_state_syncing{chain_id=\"$chain_id\",type=\"api\"}",
+                    "interval": "",
+                    "legendFormat": "",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "API Syncing",
+            "type": "gauge"
+        },
         {
             "collapsed": false,
             "datasource": {
@@ -113,7 +458,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 0
+                "y": 9
             },
             "id": 35,
             "panels": [],
@@ -132,13 +477,13 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "gridPos": {
                 "h": 8,
                 "w": 4,
                 "x": 0,
-                "y": 1
+                "y": 10
             },
             "id": 59,
             "links": [
@@ -162,7 +507,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "refId": "A"
                 }
@@ -172,7 +517,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "fieldConfig": {
                 "defaults": {
@@ -203,7 +548,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 4,
-                "y": 1
+                "y": 10
             },
             "id": 25,
             "options": {
@@ -226,7 +571,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": true,
                     "expr": "cosmos_validators_active{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
@@ -241,7 +586,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of peers node's connected to\n\n(Need to change Threshold)",
             "fieldConfig": {
@@ -285,7 +630,7 @@
                 "h": 8,
                 "w": 3,
                 "x": 6,
-                "y": 1
+                "y": 10
             },
             "id": 27,
             "maxDataPoints": 100,
@@ -311,7 +656,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": false,
                     "expr": "tendermint_p2p_peers{chain_id=\"$chain_id\"}",
@@ -330,7 +675,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of missed blocks",
             "fieldConfig": {
@@ -378,7 +723,7 @@
                 "h": 8,
                 "w": 3,
                 "x": 9,
-                "y": 1
+                "y": 10
             },
             "id": 61,
             "maxDataPoints": 100,
@@ -404,7 +749,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": false,
                     "expr": "cosmos_validator_missed_blocks{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
@@ -423,7 +768,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Validator missed blocks",
             "fieldConfig": {
@@ -496,7 +841,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 1
+                "y": 10
             },
             "id": 60,
             "maxDataPoints": 100,
@@ -517,7 +862,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": true,
                     "expr": "cosmos_validator_missed_blocks{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
@@ -535,7 +880,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "fieldConfig": {
                 "defaults": {
@@ -566,7 +911,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 4,
-                "y": 5
+                "y": 14
             },
             "id": 54,
             "options": {
@@ -589,7 +934,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": true,
@@ -613,7 +958,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 9
+                "y": 18
             },
             "id": 21,
             "panels": [],
@@ -632,7 +977,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Height of the chain",
             "fieldConfig": {
@@ -668,7 +1013,7 @@
                 "h": 8,
                 "w": 3,
                 "x": 0,
-                "y": 10
+                "y": 19
             },
             "id": 37,
             "maxDataPoints": 100,
@@ -694,7 +1039,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -714,7 +1059,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "",
             "fieldConfig": {
@@ -762,7 +1107,7 @@
                 "h": 4,
                 "w": 3,
                 "x": 3,
-                "y": 10
+                "y": 19
             },
             "id": 39,
             "maxDataPoints": 100,
@@ -788,7 +1133,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -807,7 +1152,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of validators who did not sign",
             "fieldConfig": {
@@ -847,7 +1192,7 @@
                 "h": 4,
                 "w": 4,
                 "x": 6,
-                "y": 10
+                "y": 19
             },
             "id": 47,
             "maxDataPoints": 100,
@@ -873,7 +1218,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -892,7 +1237,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Total number of transactions committed",
             "fieldConfig": {
@@ -928,7 +1273,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 10,
-                "y": 10
+                "y": 19
             },
             "id": 43,
             "maxDataPoints": 100,
@@ -954,7 +1299,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -973,7 +1318,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of validators missing blocks",
             "fieldConfig": {
@@ -1021,7 +1366,7 @@
                 "h": 4,
                 "w": 3,
                 "x": 12,
-                "y": 10
+                "y": 19
             },
             "id": 98,
             "maxDataPoints": 100,
@@ -1047,7 +1392,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": false,
                     "expr": "count(cosmos_validators_missed_blocks{chain_id=\"$chain_id\"} > 0) OR on() vector(0)",
@@ -1066,7 +1411,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "",
             "fieldConfig": {
@@ -1149,7 +1494,7 @@
                 "h": 8,
                 "w": 9,
                 "x": 15,
-                "y": 10
+                "y": 19
             },
             "id": 102,
             "options": {
@@ -1175,7 +1520,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": false,
                     "expr": "sort_desc(topk(10, cosmos_validators_missed_blocks{chain_id=\"$chain_id\"} > 0))",
@@ -1218,7 +1563,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "The total number of bonded tokens in the network",
             "fieldConfig": {
@@ -1244,7 +1589,7 @@
                 "h": 4,
                 "w": 3,
                 "x": 3,
-                "y": 14
+                "y": 23
             },
             "id": 45,
             "options": {
@@ -1269,7 +1614,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": true,
@@ -1289,7 +1634,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Total voting power of the missing validators",
             "fieldConfig": {
@@ -1329,7 +1674,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 6,
-                "y": 14
+                "y": 23
             },
             "id": 41,
             "maxDataPoints": 100,
@@ -1355,7 +1700,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -1374,7 +1719,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Total voting power of the missing validators",
             "fieldConfig": {
@@ -1414,7 +1759,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 8,
-                "y": 14
+                "y": 23
             },
             "id": 49,
             "maxDataPoints": 100,
@@ -1440,7 +1785,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -1459,7 +1804,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of uncommitted transactions",
             "fieldConfig": {
@@ -1503,7 +1848,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 10,
-                "y": 14
+                "y": 23
             },
             "id": 51,
             "maxDataPoints": 100,
@@ -1529,7 +1874,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "editorMode": "code",
                     "exemplar": false,
@@ -1548,7 +1893,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of highest missed blocks for validators on chain",
             "fieldConfig": {
@@ -1596,7 +1941,7 @@
                 "h": 4,
                 "w": 3,
                 "x": 12,
-                "y": 14
+                "y": 23
             },
             "id": 97,
             "maxDataPoints": 100,
@@ -1622,7 +1967,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": false,
                     "expr": "max(cosmos_validators_missed_blocks{chain_id=\"$chain_id\"})",
@@ -1641,7 +1986,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of blocks produced last minute",
             "fieldConfig": {
@@ -1685,7 +2030,7 @@
                 "h": 8,
                 "w": 3,
                 "x": 0,
-                "y": 18
+                "y": 27
             },
             "id": 95,
             "maxDataPoints": 100,
@@ -1711,7 +2056,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
@@ -1735,7 +2080,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Number of block produced last minute",
             "fieldConfig": {
@@ -1800,7 +2145,7 @@
                 "h": 8,
                 "w": 9,
                 "x": 3,
-                "y": 18
+                "y": 27
             },
             "id": 94,
             "maxDataPoints": 100,
@@ -1821,7 +2166,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": true,
                     "expr": "increase(tendermint_consensus_height{chain_id=\"$chain_id\"}[1m])",
@@ -1839,7 +2184,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "PBFA97CFB590B2093"
             },
             "description": "Block size in bytes",
             "fieldConfig": {
@@ -1901,7 +2246,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 18
+                "y": 27
             },
             "id": 53,
             "maxDataPoints": 100,
@@ -1922,7 +2267,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "exemplar": true,
                     "expr": "tendermint_consensus_block_size_bytes{chain_id=\"$chain_id\"}",
@@ -1938,7 +2283,7 @@
             "type": "timeseries"
         },
         {
-            "collapsed": false,
+            "collapsed": true,
             "datasource": {
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
@@ -1947,10 +2292,1376 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 26
+                "y": 35
             },
             "id": 19,
-            "panels": [],
+            "panels": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "max": 1,
+                            "min": 0,
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            "unit": "bool"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 4,
+                        "w": 2,
+                        "x": 0,
+                        "y": 20
+                    },
+                    "id": 55,
+                    "options": {
+                        "minVizHeight": 75,
+                        "minVizWidth": 75,
+                        "orientation": "auto",
+                        "reduceOptions": {
+                            "calcs": [
+                                "lastNotNull"
+                            ],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showThresholdLabels": false,
+                        "showThresholdMarkers": false,
+                        "sizing": "auto"
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "cosmos_validator_jailed{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
+                            "interval": "",
+                            "legendFormat": "",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Jailed",
+                    "type": "gauge"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 4,
+                        "w": 2,
+                        "x": 2,
+                        "y": 20
+                    },
+                    "id": 2,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "auto",
+                        "orientation": "vertical",
+                        "reduceOptions": {
+                            "calcs": [
+                                "lastNotNull"
+                            ],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "text": {},
+                        "textMode": "value",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "sort(cosmos_validator_rank{chain_id=\"$chain_id\", moniker=\"$moniker\"})",
+                            "instant": false,
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Rank",
+                    "type": "stat"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    }
+                                ]
+                            },
+                            "unit": "none"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 4,
+                        "y": 20
+                    },
+                    "id": 4,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "auto",
+                        "orientation": "vertical",
+                        "reduceOptions": {
+                            "calcs": [
+                                "lastNotNull"
+                            ],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "text": {},
+                        "textMode": "value",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": false,
+                            "expr": "sum(cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (denom)",
+                            "instant": true,
+                            "interval": "",
+                            "legendFormat": "{{ denom }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Total delegations",
+                    "type": "stat"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "max": 1,
+                            "min": 0,
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            },
+                            "unit": "percentunit"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 8,
+                        "y": 20
+                    },
+                    "id": 5,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "auto",
+                        "orientation": "auto",
+                        "reduceOptions": {
+                            "calcs": [
+                                "lastNotNull"
+                            ],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "text": {},
+                        "textMode": "value",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "cosmos_validator_commission_rate{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
+                            "interval": "",
+                            "legendFormat": "",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Commission rate",
+                    "type": "stat"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 12,
+                        "y": 20
+                    },
+                    "id": 11,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "auto",
+                        "orientation": "vertical",
+                        "reduceOptions": {
+                            "calcs": [
+                                "lastNotNull"
+                            ],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "text": {},
+                        "textMode": "value",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "count(cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"})",
+                            "instant": false,
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Delegations count",
+                    "type": "stat"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 16,
+                        "y": 20
+                    },
+                    "id": 13,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "auto",
+                        "orientation": "vertical",
+                        "reduceOptions": {
+                            "calcs": [
+                                "lastNotNull"
+                            ],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "text": {},
+                        "textMode": "value",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "count(cosmos_validator_redelegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) OR on() vector(0)",
+                            "instant": false,
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Redelegations count",
+                    "type": "stat"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 20,
+                        "y": 20
+                    },
+                    "id": 17,
+                    "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "auto",
+                        "orientation": "vertical",
+                        "reduceOptions": {
+                            "calcs": [
+                                "lastNotNull"
+                            ],
+                            "fields": "",
+                            "values": false
+                        },
+                        "showPercentChange": false,
+                        "text": {},
+                        "textMode": "value",
+                        "wideLayout": true
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "count(cosmos_validator_unbondings{chain_id=\"$chain_id\", moniker=\"$moniker\"}) OR on() vector(0)",
+                            "instant": false,
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Unbondings count",
+                    "type": "stat"
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "dashLength": 10,
+                    "dashes": false,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "unit": "locale"
+                        },
+                        "overrides": []
+                    },
+                    "fill": 1,
+                    "fillGradient": 0,
+                    "gridPos": {
+                        "h": 7,
+                        "w": 8,
+                        "x": 0,
+                        "y": 24
+                    },
+                    "hiddenSeries": false,
+                    "id": 14,
+                    "legend": {
+                        "avg": false,
+                        "current": false,
+                        "max": false,
+                        "min": false,
+                        "show": true,
+                        "total": false,
+                        "values": false
+                    },
+                    "lines": true,
+                    "linewidth": 1,
+                    "nullPointMode": "null",
+                    "options": {
+                        "alertThreshold": true
+                    },
+                    "percentage": false,
+                    "pluginVersion": "10.4.2",
+                    "pointradius": 2,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "spaceLength": 10,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "sum(cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (moniker, denom)",
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}, {{ denom }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeRegions": [],
+                    "title": "Delegations",
+                    "tooltip": {
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "$$hashKey": "object:162",
+                            "format": "locale",
+                            "logBase": 1,
+                            "show": true
+                        },
+                        {
+                            "$$hashKey": "object:163",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        }
+                    ],
+                    "yaxis": {
+                        "align": false
+                    }
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "custom": {
+                                "align": "auto",
+                                "cellOptions": {
+                                    "type": "auto"
+                                },
+                                "filterable": false,
+                                "inspect": false
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            },
+                            "unit": "locale"
+                        },
+                        "overrides": [
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "Value"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 110
+                                    }
+                                ]
+                            },
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "moniker"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 122
+                                    }
+                                ]
+                            },
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "delegated_by"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 444
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "gridPos": {
+                        "h": 7,
+                        "w": 16,
+                        "x": 8,
+                        "y": 24
+                    },
+                    "id": 3,
+                    "options": {
+                        "cellHeight": "sm",
+                        "footer": {
+                            "countRows": false,
+                            "fields": "",
+                            "reducer": [
+                                "sum"
+                            ],
+                            "show": false
+                        },
+                        "showHeader": true,
+                        "sortBy": [
+                            {
+                                "desc": true,
+                                "displayName": "Value"
+                            }
+                        ]
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": false,
+                            "expr": "cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
+                            "format": "table",
+                            "instant": true,
+                            "interval": "",
+                            "legendFormat": "",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Delegations",
+                    "transformations": [
+                        {
+                            "id": "organize",
+                            "options": {
+                                "excludeByName": {
+                                    "Time": true,
+                                    "__name__": true,
+                                    "address": true,
+                                    "chain_id": true,
+                                    "instance": true,
+                                    "job": true,
+                                    "moniker": true
+                                },
+                                "indexByName": {
+                                    "Time": 0,
+                                    "Value": 7,
+                                    "address": 1,
+                                    "chain_id": 3,
+                                    "delegated_by": 4,
+                                    "denom": 8,
+                                    "instance": 5,
+                                    "job": 6,
+                                    "moniker": 2
+                                },
+                                "renameByName": {}
+                            }
+                        }
+                    ],
+                    "type": "table"
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "dashLength": 10,
+                    "dashes": false,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fill": 1,
+                    "fillGradient": 0,
+                    "gridPos": {
+                        "h": 7,
+                        "w": 8,
+                        "x": 0,
+                        "y": 31
+                    },
+                    "hiddenSeries": false,
+                    "id": 8,
+                    "legend": {
+                        "avg": false,
+                        "current": false,
+                        "max": false,
+                        "min": false,
+                        "show": true,
+                        "total": false,
+                        "values": false
+                    },
+                    "lines": true,
+                    "linewidth": 1,
+                    "nullPointMode": "null",
+                    "options": {
+                        "alertThreshold": true
+                    },
+                    "percentage": false,
+                    "pluginVersion": "10.4.2",
+                    "pointradius": 2,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "spaceLength": 10,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "sum(cosmos_validator_redelegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (moniker, denom)",
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}, {{ denom }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeRegions": [],
+                    "title": "Redelegations",
+                    "tooltip": {
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "$$hashKey": "object:162",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        },
+                        {
+                            "$$hashKey": "object:163",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        }
+                    ],
+                    "yaxis": {
+                        "align": false
+                    }
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "custom": {
+                                "align": "auto",
+                                "cellOptions": {
+                                    "type": "auto"
+                                },
+                                "filterable": false,
+                                "inspect": false
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": [
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "Value"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 110
+                                    }
+                                ]
+                            },
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "moniker"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 122
+                                    }
+                                ]
+                            },
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "delegated_by"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 379
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "gridPos": {
+                        "h": 7,
+                        "w": 16,
+                        "x": 8,
+                        "y": 31
+                    },
+                    "id": 15,
+                    "options": {
+                        "cellHeight": "sm",
+                        "footer": {
+                            "countRows": false,
+                            "fields": "",
+                            "reducer": [
+                                "sum"
+                            ],
+                            "show": false
+                        },
+                        "showHeader": true,
+                        "sortBy": [
+                            {
+                                "desc": true,
+                                "displayName": "Value"
+                            }
+                        ]
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": false,
+                            "expr": "cosmos_validator_redelegations{chain_id=\"$chain_id\", moniker=\"$moniker\"} ",
+                            "format": "table",
+                            "instant": true,
+                            "interval": "",
+                            "legendFormat": "",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Redelegations",
+                    "transformations": [
+                        {
+                            "id": "organize",
+                            "options": {
+                                "excludeByName": {
+                                    "Time": true,
+                                    "chain_id": true,
+                                    "instance": true,
+                                    "job": true
+                                },
+                                "indexByName": {
+                                    "Time": 0,
+                                    "Value": 7,
+                                    "address": 1,
+                                    "chain_id": 3,
+                                    "delegated_by": 4,
+                                    "denom": 8,
+                                    "instance": 5,
+                                    "job": 6,
+                                    "moniker": 2
+                                },
+                                "renameByName": {}
+                            }
+                        }
+                    ],
+                    "type": "table"
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "dashLength": 10,
+                    "dashes": false,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fill": 1,
+                    "fillGradient": 0,
+                    "gridPos": {
+                        "h": 7,
+                        "w": 8,
+                        "x": 0,
+                        "y": 38
+                    },
+                    "hiddenSeries": false,
+                    "id": 7,
+                    "legend": {
+                        "avg": false,
+                        "current": false,
+                        "max": false,
+                        "min": false,
+                        "show": true,
+                        "total": false,
+                        "values": false
+                    },
+                    "lines": true,
+                    "linewidth": 1,
+                    "nullPointMode": "null",
+                    "options": {
+                        "alertThreshold": true
+                    },
+                    "percentage": false,
+                    "pluginVersion": "10.4.2",
+                    "pointradius": 2,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "spaceLength": 10,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "sum(cosmos_validator_unbondings{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (moniker, denom)",
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}, {{ denom }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeRegions": [],
+                    "title": "Unbondings",
+                    "tooltip": {
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "$$hashKey": "object:162",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        },
+                        {
+                            "$$hashKey": "object:163",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        }
+                    ],
+                    "yaxis": {
+                        "align": false
+                    }
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "custom": {
+                                "align": "auto",
+                                "cellOptions": {
+                                    "type": "auto"
+                                },
+                                "filterable": false,
+                                "inspect": false
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green",
+                                        "value": null
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": [
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "Value"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 110
+                                    }
+                                ]
+                            },
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "moniker"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 122
+                                    }
+                                ]
+                            },
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "delegated_by"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "custom.width",
+                                        "value": 379
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "gridPos": {
+                        "h": 7,
+                        "w": 16,
+                        "x": 8,
+                        "y": 38
+                    },
+                    "id": 16,
+                    "options": {
+                        "cellHeight": "sm",
+                        "footer": {
+                            "countRows": false,
+                            "fields": "",
+                            "reducer": [
+                                "sum"
+                            ],
+                            "show": false
+                        },
+                        "showHeader": true,
+                        "sortBy": [
+                            {
+                                "desc": true,
+                                "displayName": "exemplar"
+                            }
+                        ]
+                    },
+                    "pluginVersion": "10.4.2",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": false,
+                            "expr": "cosmos_validator_unbondings{chain_id=\"$chain_id\", moniker=\"$moniker\"} ",
+                            "format": "table",
+                            "instant": true,
+                            "interval": "",
+                            "legendFormat": "",
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Unbondings",
+                    "transformations": [
+                        {
+                            "id": "organize",
+                            "options": {
+                                "excludeByName": {
+                                    "Time": true,
+                                    "__name__": true,
+                                    "address": true,
+                                    "chain_id": true,
+                                    "instance": true,
+                                    "job": true,
+                                    "moniker": true
+                                },
+                                "indexByName": {
+                                    "Time": 0,
+                                    "Value": 7,
+                                    "address": 1,
+                                    "chain_id": 3,
+                                    "denom": 8,
+                                    "instance": 4,
+                                    "job": 5,
+                                    "moniker": 2,
+                                    "unbonded_by": 6
+                                },
+                                "renameByName": {}
+                            }
+                        }
+                    ],
+                    "type": "table"
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "dashLength": 10,
+                    "dashes": false,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fill": 1,
+                    "fillGradient": 0,
+                    "gridPos": {
+                        "h": 7,
+                        "w": 12,
+                        "x": 0,
+                        "y": 45
+                    },
+                    "hiddenSeries": false,
+                    "id": 10,
+                    "legend": {
+                        "avg": false,
+                        "current": false,
+                        "max": false,
+                        "min": false,
+                        "show": true,
+                        "total": false,
+                        "values": false
+                    },
+                    "lines": true,
+                    "linewidth": 1,
+                    "nullPointMode": "null",
+                    "options": {
+                        "alertThreshold": true
+                    },
+                    "percentage": false,
+                    "pluginVersion": "10.4.2",
+                    "pointradius": 2,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "spaceLength": 10,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "cosmos_validator_rewards{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}, {{ denom }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeRegions": [],
+                    "title": "Rewards",
+                    "tooltip": {
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "$$hashKey": "object:162",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        },
+                        {
+                            "$$hashKey": "object:163",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        }
+                    ],
+                    "yaxis": {
+                        "align": false
+                    }
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "dashLength": 10,
+                    "dashes": false,
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PBFA97CFB590B2093"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "unit": "locale"
+                        },
+                        "overrides": []
+                    },
+                    "fill": 1,
+                    "fillGradient": 0,
+                    "gridPos": {
+                        "h": 7,
+                        "w": 12,
+                        "x": 12,
+                        "y": 45
+                    },
+                    "hiddenSeries": false,
+                    "id": 6,
+                    "legend": {
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 1,
+                    "nullPointMode": "null",
+                    "options": {
+                        "alertThreshold": true
+                    },
+                    "percentage": false,
+                    "pluginVersion": "10.4.2",
+                    "pointradius": 2,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "spaceLength": 10,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "PBFA97CFB590B2093"
+                            },
+                            "exemplar": true,
+                            "expr": "cosmos_validator_commission{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
+                            "interval": "",
+                            "legendFormat": "{{ moniker }}, {{ denom }}",
+                            "refId": "A"
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeRegions": [],
+                    "title": "Commission",
+                    "tooltip": {
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "$$hashKey": "object:162",
+                            "decimals": 4,
+                            "format": "locale",
+                            "logBase": 1,
+                            "show": true
+                        },
+                        {
+                            "$$hashKey": "object:163",
+                            "format": "short",
+                            "logBase": 1,
+                            "show": true
+                        }
+                    ],
+                    "yaxis": {
+                        "align": false
+                    }
+                }
+            ],
             "targets": [
                 {
                     "datasource": {
@@ -1964,1371 +3675,6 @@
             "type": "row"
         },
         {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "max": 1,
-                    "min": 0,
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 1
-                            }
-                        ]
-                    },
-                    "unit": "bool"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 0,
-                "y": 27
-            },
-            "id": 55,
-            "options": {
-                "minVizHeight": 75,
-                "minVizWidth": 75,
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showThresholdLabels": false,
-                "showThresholdMarkers": false,
-                "sizing": "auto"
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "cosmos_validator_jailed{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
-                    "interval": "",
-                    "legendFormat": "",
-                    "refId": "A"
-                }
-            ],
-            "title": "Jailed",
-            "type": "gauge"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 2,
-                "y": 27
-            },
-            "id": 2,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "none",
-                "justifyMode": "auto",
-                "orientation": "vertical",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "value",
-                "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "sort(cosmos_validator_rank{chain_id=\"$chain_id\", moniker=\"$moniker\"})",
-                    "instant": false,
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}",
-                    "refId": "A"
-                }
-            ],
-            "title": "Rank",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            }
-                        ]
-                    },
-                    "unit": "none"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 4,
-                "x": 4,
-                "y": 27
-            },
-            "id": 4,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "none",
-                "justifyMode": "auto",
-                "orientation": "vertical",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "value",
-                "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": false,
-                    "expr": "sum(cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (denom)",
-                    "instant": true,
-                    "interval": "",
-                    "legendFormat": "{{ denom }}",
-                    "refId": "A"
-                }
-            ],
-            "title": "Total delegations",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "max": 1,
-                    "min": 0,
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "percentunit"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 4,
-                "x": 8,
-                "y": 27
-            },
-            "id": 5,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "none",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "value",
-                "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "cosmos_validator_commission_rate{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
-                    "interval": "",
-                    "legendFormat": "",
-                    "refId": "A"
-                }
-            ],
-            "title": "Commission rate",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 4,
-                "x": 12,
-                "y": 27
-            },
-            "id": 11,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "none",
-                "justifyMode": "auto",
-                "orientation": "vertical",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "value",
-                "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "count(cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"})",
-                    "instant": false,
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}",
-                    "refId": "A"
-                }
-            ],
-            "title": "Delegations count",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 4,
-                "x": 16,
-                "y": 27
-            },
-            "id": 13,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "none",
-                "justifyMode": "auto",
-                "orientation": "vertical",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "value",
-                "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "count(cosmos_validator_redelegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) OR on() vector(0)",
-                    "instant": false,
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}",
-                    "refId": "A"
-                }
-            ],
-            "title": "Redelegations count",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 4,
-                "x": 20,
-                "y": 27
-            },
-            "id": 17,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "none",
-                "justifyMode": "auto",
-                "orientation": "vertical",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "value",
-                "wideLayout": true
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "count(cosmos_validator_unbondings{chain_id=\"$chain_id\", moniker=\"$moniker\"}) OR on() vector(0)",
-                    "instant": false,
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}",
-                    "refId": "A"
-                }
-            ],
-            "title": "Unbondings count",
-            "type": "stat"
-        },
-        {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "unit": "locale"
-                },
-                "overrides": []
-            },
-            "fill": 1,
-            "fillGradient": 0,
-            "gridPos": {
-                "h": 7,
-                "w": 8,
-                "x": 0,
-                "y": 31
-            },
-            "hiddenSeries": false,
-            "id": 14,
-            "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "nullPointMode": "null",
-            "options": {
-                "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "10.4.2",
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "sum(cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (moniker, denom)",
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}, {{ denom }}",
-                    "refId": "A"
-                }
-            ],
-            "thresholds": [],
-            "timeRegions": [],
-            "title": "Delegations",
-            "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "$$hashKey": "object:162",
-                    "format": "locale",
-                    "logBase": 1,
-                    "show": true
-                },
-                {
-                    "$$hashKey": "object:163",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false
-            }
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": {
-                            "type": "auto"
-                        },
-                        "filterable": false,
-                        "inspect": false
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "locale"
-                },
-                "overrides": [
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "Value"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 110
-                            }
-                        ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "moniker"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 122
-                            }
-                        ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "delegated_by"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 444
-                            }
-                        ]
-                    }
-                ]
-            },
-            "gridPos": {
-                "h": 7,
-                "w": 16,
-                "x": 8,
-                "y": 31
-            },
-            "id": 3,
-            "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "fields": "",
-                    "reducer": [
-                        "sum"
-                    ],
-                    "show": false
-                },
-                "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "Value"
-                    }
-                ]
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": false,
-                    "expr": "cosmos_validator_delegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
-                    "format": "table",
-                    "instant": true,
-                    "interval": "",
-                    "legendFormat": "",
-                    "refId": "A"
-                }
-            ],
-            "title": "Delegations",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "__name__": true,
-                            "address": true,
-                            "chain_id": true,
-                            "instance": true,
-                            "job": true,
-                            "moniker": true
-                        },
-                        "indexByName": {
-                            "Time": 0,
-                            "Value": 7,
-                            "address": 1,
-                            "chain_id": 3,
-                            "delegated_by": 4,
-                            "denom": 8,
-                            "instance": 5,
-                            "job": 6,
-                            "moniker": 2
-                        },
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "table"
-        },
-        {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fill": 1,
-            "fillGradient": 0,
-            "gridPos": {
-                "h": 7,
-                "w": 8,
-                "x": 0,
-                "y": 38
-            },
-            "hiddenSeries": false,
-            "id": 8,
-            "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "nullPointMode": "null",
-            "options": {
-                "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "10.4.2",
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "sum(cosmos_validator_redelegations{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (moniker, denom)",
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}, {{ denom }}",
-                    "refId": "A"
-                }
-            ],
-            "thresholds": [],
-            "timeRegions": [],
-            "title": "Redelegations",
-            "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "$$hashKey": "object:162",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                },
-                {
-                    "$$hashKey": "object:163",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false
-            }
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": {
-                            "type": "auto"
-                        },
-                        "filterable": false,
-                        "inspect": false
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": [
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "Value"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 110
-                            }
-                        ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "moniker"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 122
-                            }
-                        ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "delegated_by"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 379
-                            }
-                        ]
-                    }
-                ]
-            },
-            "gridPos": {
-                "h": 7,
-                "w": 16,
-                "x": 8,
-                "y": 38
-            },
-            "id": 15,
-            "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "fields": "",
-                    "reducer": [
-                        "sum"
-                    ],
-                    "show": false
-                },
-                "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "Value"
-                    }
-                ]
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": false,
-                    "expr": "cosmos_validator_redelegations{chain_id=\"$chain_id\", moniker=\"$moniker\"} ",
-                    "format": "table",
-                    "instant": true,
-                    "interval": "",
-                    "legendFormat": "",
-                    "refId": "A"
-                }
-            ],
-            "title": "Redelegations",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "chain_id": true,
-                            "instance": true,
-                            "job": true
-                        },
-                        "indexByName": {
-                            "Time": 0,
-                            "Value": 7,
-                            "address": 1,
-                            "chain_id": 3,
-                            "delegated_by": 4,
-                            "denom": 8,
-                            "instance": 5,
-                            "job": 6,
-                            "moniker": 2
-                        },
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "table"
-        },
-        {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fill": 1,
-            "fillGradient": 0,
-            "gridPos": {
-                "h": 7,
-                "w": 8,
-                "x": 0,
-                "y": 45
-            },
-            "hiddenSeries": false,
-            "id": 7,
-            "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "nullPointMode": "null",
-            "options": {
-                "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "10.4.2",
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "sum(cosmos_validator_unbondings{chain_id=\"$chain_id\", moniker=\"$moniker\"}) by (moniker, denom)",
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}, {{ denom }}",
-                    "refId": "A"
-                }
-            ],
-            "thresholds": [],
-            "timeRegions": [],
-            "title": "Unbondings",
-            "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "$$hashKey": "object:162",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                },
-                {
-                    "$$hashKey": "object:163",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false
-            }
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": {
-                            "type": "auto"
-                        },
-                        "filterable": false,
-                        "inspect": false
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": [
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "Value"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 110
-                            }
-                        ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "moniker"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 122
-                            }
-                        ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "delegated_by"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 379
-                            }
-                        ]
-                    }
-                ]
-            },
-            "gridPos": {
-                "h": 7,
-                "w": 16,
-                "x": 8,
-                "y": 45
-            },
-            "id": 16,
-            "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "fields": "",
-                    "reducer": [
-                        "sum"
-                    ],
-                    "show": false
-                },
-                "showHeader": true,
-                "sortBy": [
-                    {
-                        "desc": true,
-                        "displayName": "exemplar"
-                    }
-                ]
-            },
-            "pluginVersion": "10.4.2",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": false,
-                    "expr": "cosmos_validator_unbondings{chain_id=\"$chain_id\", moniker=\"$moniker\"} ",
-                    "format": "table",
-                    "instant": true,
-                    "interval": "",
-                    "legendFormat": "",
-                    "refId": "A"
-                }
-            ],
-            "title": "Unbondings",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "__name__": true,
-                            "address": true,
-                            "chain_id": true,
-                            "instance": true,
-                            "job": true,
-                            "moniker": true
-                        },
-                        "indexByName": {
-                            "Time": 0,
-                            "Value": 7,
-                            "address": 1,
-                            "chain_id": 3,
-                            "denom": 8,
-                            "instance": 4,
-                            "job": 5,
-                            "moniker": 2,
-                            "unbonded_by": 6
-                        },
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "table"
-        },
-        {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fill": 1,
-            "fillGradient": 0,
-            "gridPos": {
-                "h": 7,
-                "w": 12,
-                "x": 0,
-                "y": 52
-            },
-            "hiddenSeries": false,
-            "id": 10,
-            "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "nullPointMode": "null",
-            "options": {
-                "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "10.4.2",
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "cosmos_validator_rewards{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}, {{ denom }}",
-                    "refId": "A"
-                }
-            ],
-            "thresholds": [],
-            "timeRegions": [],
-            "title": "Rewards",
-            "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "$$hashKey": "object:162",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                },
-                {
-                    "$$hashKey": "object:163",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false
-            }
-        },
-        {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "unit": "locale"
-                },
-                "overrides": []
-            },
-            "fill": 1,
-            "fillGradient": 0,
-            "gridPos": {
-                "h": 7,
-                "w": 12,
-                "x": 12,
-                "y": 52
-            },
-            "hiddenSeries": false,
-            "id": 6,
-            "legend": {
-                "avg": false,
-                "current": true,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": true
-            },
-            "lines": true,
-            "linewidth": 1,
-            "nullPointMode": "null",
-            "options": {
-                "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "10.4.2",
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
-                    },
-                    "exemplar": true,
-                    "expr": "cosmos_validator_commission{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
-                    "interval": "",
-                    "legendFormat": "{{ moniker }}, {{ denom }}",
-                    "refId": "A"
-                }
-            ],
-            "thresholds": [],
-            "timeRegions": [],
-            "title": "Commission",
-            "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "$$hashKey": "object:162",
-                    "decimals": 4,
-                    "format": "locale",
-                    "logBase": 1,
-                    "show": true
-                },
-                {
-                    "$$hashKey": "object:163",
-                    "format": "short",
-                    "logBase": 1,
-                    "show": true
-                }
-            ],
-            "yaxis": {
-                "align": false
-            }
-        },
-        {
             "collapsed": true,
             "datasource": {
                 "type": "prometheus",
@@ -3338,14 +3684,14 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 59
+                "y": 36
             },
             "id": 63,
             "panels": [
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "Core node uptime",
                     "fieldConfig": {
@@ -3387,7 +3733,7 @@
                         "h": 5,
                         "w": 2,
                         "x": 0,
-                        "y": 60
+                        "y": 68
                     },
                     "hideTimeOverride": true,
                     "id": 65,
@@ -3419,7 +3765,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "sum(time() - node_boot_time_seconds{instance=\"$instance\"})",
@@ -3439,7 +3785,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "",
                     "fieldConfig": {
@@ -3479,7 +3825,7 @@
                         "h": 2,
                         "w": 2,
                         "x": 2,
-                        "y": 60
+                        "y": 68
                     },
                     "id": 67,
                     "maxDataPoints": 100,
@@ -3505,7 +3851,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "count(count(node_cpu_seconds_total{instance=~\"$instance\", mode='system'}) by (cpu))",
@@ -3524,7 +3870,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "",
                     "fieldConfig": {
@@ -3561,7 +3907,7 @@
                         "h": 5,
                         "w": 9,
                         "x": 4,
-                        "y": 60
+                        "y": 68
                     },
                     "id": 71,
                     "interval": "",
@@ -3589,7 +3935,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "100 - (avg by(alias) (irate(node_cpu_seconds_total{instance=~\"$instance\", mode=\"idle\"}[1m])) * 100)",
@@ -3602,7 +3948,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "(1 - (node_memory_MemAvailable_bytes{instance=~\"$instance\"} / (node_memory_MemTotal_bytes{instance=~\"$instance\"})))* 100",
@@ -3615,7 +3961,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "(1 - (node_memory_SwapFree_bytes{instance=~\"$instance\"} / node_memory_SwapTotal_bytes{instance=~\"$instance\"})) * 100",
@@ -3628,7 +3974,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "100 - (node_filesystem_free_bytes{instance=~\"$instance\", device=\"/dev/sda2\"} *100 / node_filesystem_size_bytes{instance=~\"$instance\", device=\"/dev/sda2\"})",
@@ -3641,7 +3987,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "100 - (node_filesystem_free_bytes{instance=~\"$instance\", device=\"/dev/sda1\"} *100 / node_filesystem_size_bytes{instance=~\"$instance\", device=\"/dev/sda1\"})",
@@ -3657,7 +4003,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "",
                     "fieldConfig": {
@@ -3693,7 +4039,7 @@
                         "h": 5,
                         "w": 3,
                         "x": 13,
-                        "y": 60
+                        "y": 68
                     },
                     "hideTimeOverride": false,
                     "id": 73,
@@ -3718,7 +4064,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_filefd_allocated{instance=~\"$instance\"}",
@@ -3737,14 +4083,14 @@
                     "columns": [],
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "fontSize": "120%",
                     "gridPos": {
                         "h": 5,
                         "w": 8,
                         "x": 16,
-                        "y": 60
+                        "y": 68
                     },
                     "id": 75,
                     "scroll": true,
@@ -3881,7 +4227,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "node_filesystem_size_bytes{instance=~'$instance',fstype=~\"ext4|xfs\"}",
@@ -3896,7 +4242,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "node_filesystem_avail_bytes {instance=~'$instance',fstype=~\"ext4|xfs\"}",
@@ -3911,7 +4257,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "1-(node_filesystem_free_bytes{instance=~'$instance',fstype=~\"ext4|xfs\"} / node_filesystem_size_bytes{instance=~'$instance',fstype=~\"ext4|xfs\"})",
@@ -3926,7 +4272,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "expr": "",
                             "format": "table",
@@ -3943,7 +4289,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "",
                     "fieldConfig": {
@@ -3979,7 +4325,7 @@
                         "h": 3,
                         "w": 2,
                         "x": 2,
-                        "y": 62
+                        "y": 70
                     },
                     "id": 69,
                     "maxDataPoints": 100,
@@ -4005,7 +4351,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": false,
                             "expr": "node_memory_MemTotal_bytes{instance=~\"$instance\"}",
@@ -4028,7 +4374,7 @@
                     "dashes": false,
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "fieldConfig": {
                         "defaults": {
@@ -4043,7 +4389,7 @@
                         "h": 11,
                         "w": 13,
                         "x": 0,
-                        "y": 65
+                        "y": 73
                     },
                     "hiddenSeries": false,
                     "id": 77,
@@ -4096,7 +4442,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_load1{instance=~\"$instance\"}*100",
@@ -4110,7 +4456,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_load5{instance=~\"$instance\"}*100",
@@ -4124,7 +4470,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_load15{instance=~\"$instance\"}*100",
@@ -4227,7 +4573,7 @@
                     "dashes": false,
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "decimals": 2,
                     "description": "node_disk_io_time_seconds_total：\nThe number of milliseconds the disk spends on input/output operations. This value is the accumulated value.（Milliseconds Spent Doing I/Os）\n\nirate(node_disk_io_time_seconds_total[1m])：\nCalculate the rate per second: (last value - last previous value) / timestamp difference, that is, the percentage of time that the disk spends on I/O operations in 1 second.",
@@ -4237,7 +4583,7 @@
                         "h": 11,
                         "w": 11,
                         "x": 13,
-                        "y": 65
+                        "y": 73
                     },
                     "hiddenSeries": false,
                     "id": 79,
@@ -4275,7 +4621,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$instance\",mode=\"system\"}[1m]))",
@@ -4290,7 +4636,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$instance\",mode=\"user\"}[1m]))",
@@ -4304,7 +4650,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$instance\",mode=\"idle\"}[1m]))",
@@ -4319,7 +4665,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$instance\",mode=\"iowait\"}[1m]))",
@@ -4333,7 +4679,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_io_time_seconds_total{instance=~\"$instance\"}[1m])",
@@ -4346,7 +4692,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "avg(irate(node_cpu_seconds_total{mode=\"system\"}[1m]))",
@@ -4406,7 +4752,7 @@
                     "dashes": false,
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "Reads completed: Reads per second per disk partition\n\nWrites completed: Number of writes per second per disk partition\n\nIO now Number of input/output requests being processed per disk partition per second",
                     "fill": 2,
@@ -4415,7 +4761,7 @@
                         "h": 8,
                         "w": 8,
                         "x": 0,
-                        "y": 76
+                        "y": 84
                     },
                     "height": "300",
                     "hiddenSeries": false,
@@ -4457,7 +4803,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_reads_completed_total{instance=~\"$instance\"}[1m])",
@@ -4472,7 +4818,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_writes_completed_total{instance=~\"$instance\"}[1m])",
@@ -4487,7 +4833,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_disk_io_now{instance=~\"$instance\"}",
@@ -4539,7 +4885,7 @@
                     "dashes": false,
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "Read bytes The number of bits read per second per disk partition\nWritten bytes The number of bits written per second per disk partition",
                     "fill": 2,
@@ -4548,7 +4894,7 @@
                         "h": 8,
                         "w": 8,
                         "x": 8,
-                        "y": 76
+                        "y": 84
                     },
                     "height": "300",
                     "hiddenSeries": false,
@@ -4591,7 +4937,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_read_bytes_total{instance=~\"$instance\"}[1m])",
@@ -4605,7 +4951,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_written_bytes_total{instance=~\"$instance\"}[1m])",
@@ -4660,7 +5006,7 @@
                     "dashes": false,
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "Read time ms Number of seconds per disk partition read operation\n\nWrite time ms Number of seconds spent per disk partition write operation\n\nIO time ms Number of seconds spent per disk partition input/output operation\n\n IO time weighted Weighted seconds spent per disk partition input/output operation",
                     "fill": 3,
@@ -4669,7 +5015,7 @@
                         "h": 8,
                         "w": 8,
                         "x": 16,
-                        "y": 76
+                        "y": 84
                     },
                     "height": "300",
                     "hiddenSeries": false,
@@ -4711,7 +5057,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_io_time_seconds_total{instance=~\"$instance\"}[1m])",
@@ -4726,7 +5072,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_io_time_weighted_seconds_total{instance=~\"$instance\"}[1m])",
@@ -4740,7 +5086,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_read_time_seconds_total{instance=~\"$instance\"}[1m])",
@@ -4754,7 +5100,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_disk_write_time_seconds_total{instance=~\"$instance\"}[1m])",
@@ -4804,7 +5150,7 @@
                     "dashes": false,
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "fill": 1,
                     "fillGradient": 0,
@@ -4812,7 +5158,7 @@
                         "h": 9,
                         "w": 12,
                         "x": 0,
-                        "y": 84
+                        "y": 92
                     },
                     "height": "300",
                     "hiddenSeries": false,
@@ -4854,7 +5200,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_network_receive_bytes_total{instance=~'$instance',device!~'tap.*'}[5m])*8",
@@ -4868,7 +5214,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_network_transmit_bytes_total{instance=~'$instance',device!~'tap.*'}[5m])*8",
@@ -4920,7 +5266,7 @@
                     "dashes": false,
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "PBFA97CFB590B2093"
                     },
                     "description": "CurrEstab - TCP connections with current state ESTABLISHED or CLOSE-WAIT\n\nActiveOpens - TCP average connections that have been converted from CLOSED state to SYN-SENT state (within 1 minute)\n\nPassiveOpens - Directly from LISTEN state The average number of TCP connections to SYN-RCVD state (within 1 minute)\n\nTCP_all oc - the number of TCP sockets allocated (established, applied to sk_buff)\n\nTCP_inuse - in use (listening The number of TCP sockets \n\nTCP_tw - the number of TCP connections waiting to be closed",
                     "fill": 0,
@@ -4929,7 +5275,7 @@
                         "h": 9,
                         "w": 12,
                         "x": 12,
-                        "y": 84
+                        "y": 92
                     },
                     "height": "300",
                     "hiddenSeries": false,
@@ -4965,7 +5311,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_netstat_Tcp_CurrEstab{instance=~'$instance'}",
@@ -4980,7 +5326,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_sockstat_TCP_tw{instance=~'$instance'}",
@@ -4993,7 +5339,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_netstat_Tcp_ActiveOpens{instance=~'$instance'}[1m])",
@@ -5007,7 +5353,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "irate(node_netstat_Tcp_PassiveOpens{instance=~'$instance'}[1m])",
@@ -5020,7 +5366,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_sockstat_TCP_alloc{instance=~'$instance'}",
@@ -5033,7 +5379,7 @@
                         {
                             "datasource": {
                                 "type": "prometheus",
-                                "uid": "${DS_PROMETHEUS}"
+                                "uid": "PBFA97CFB590B2093"
                             },
                             "exemplar": true,
                             "expr": "node_sockstat_TCP_inuse{instance=~'$instance'}",
@@ -5100,10 +5446,14 @@
     "templating": {
         "list": [
             {
-                "current": {},
+                "current": {
+                    "selected": false,
+                    "text": "seda-1",
+                    "value": "seda-1"
+                },
                 "datasource": {
                     "type": "prometheus",
-                    "uid": "${DS_PROMETHEUS}"
+                    "uid": "PBFA97CFB590B2093"
                 },
                 "definition": "label_values(cosmos_validator_status,chain_id)",
                 "hide": 0,
@@ -5124,10 +5474,14 @@
                 "type": "query"
             },
             {
-                "current": {},
+                "current": {
+                    "selected": false,
+                    "text": " Lavender.Five Nodes 🐝",
+                    "value": " Lavender.Five Nodes 🐝"
+                },
                 "datasource": {
                     "type": "prometheus",
-                    "uid": "${DS_PROMETHEUS}"
+                    "uid": "PBFA97CFB590B2093"
                 },
                 "definition": "label_values(cosmos_validator_status{chain_id=\"$chain_id\"},moniker)",
                 "hide": 0,
@@ -5148,10 +5502,14 @@
                 "type": "query"
             },
             {
-                "current": {},
+                "current": {
+                    "selected": true,
+                    "text": "135.148.123.8:9100",
+                    "value": "135.148.123.8:9100"
+                },
                 "datasource": {
                     "type": "prometheus",
-                    "uid": "${DS_PROMETHEUS}"
+                    "uid": "PBFA97CFB590B2093"
                 },
                 "definition": "label_values(node_memory_MemTotal_bytes, instance)",
                 "hide": 0,
@@ -5179,6 +5537,6 @@
     "timezone": "",
     "title": "Cosmos Validator",
     "uid": "cosmos_validator",
-    "version": 4,
+    "version": 6,
     "weekStart": ""
 }
