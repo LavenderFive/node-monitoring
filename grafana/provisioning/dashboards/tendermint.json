@@ -573,10 +573,12 @@
                         "type": "prometheus",
                         "uid": "PBFA97CFB590B2093"
                     },
+                    "editorMode": "code",
                     "exemplar": true,
                     "expr": "cosmos_validators_active{chain_id=\"$chain_id\", moniker=\"$moniker\"}",
                     "interval": "",
                     "legendFormat": "",
+                    "range": true,
                     "refId": "A"
                 }
             ],
@@ -2313,8 +2315,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -2380,8 +2381,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -2449,8 +2449,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     }
                                 ]
                             },
@@ -2517,8 +2516,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -2586,8 +2584,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -2655,8 +2652,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -2724,8 +2720,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -2895,8 +2890,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -3128,8 +3122,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -3357,8 +3350,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "red",
@@ -3712,8 +3704,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "red",
-                                        "value": null
+                                        "color": "red"
                                     },
                                     {
                                         "color": "yellow",
@@ -3808,8 +3799,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "orange",
-                                        "value": null
+                                        "color": "orange"
                                     },
                                     {
                                         "color": "green",
@@ -3886,8 +3876,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "light-yellow",
@@ -4018,8 +4007,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     },
                                     {
                                         "color": "rgba(237, 129, 40, 0.89)",
@@ -4312,8 +4300,7 @@
                                 "mode": "absolute",
                                 "steps": [
                                     {
-                                        "color": "green",
-                                        "value": null
+                                        "color": "green"
                                     }
                                 ]
                             },
@@ -5448,14 +5435,41 @@
             {
                 "current": {
                     "selected": false,
-                    "text": "seda-1",
-                    "value": "seda-1"
+                    "text": "akash",
+                    "value": "akash"
                 },
                 "datasource": {
                     "type": "prometheus",
                     "uid": "PBFA97CFB590B2093"
                 },
-                "definition": "label_values(cosmos_validator_status,chain_id)",
+                "definition": "label_values(tendermint_consensus_height,job)",
+                "hide": 0,
+                "includeAll": false,
+                "multi": false,
+                "name": "network",
+                "options": [],
+                "query": {
+                    "qryType": 1,
+                    "query": "label_values(tendermint_consensus_height,job)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            },
+            {
+                "current": {
+                    "selected": false,
+                    "text": "akashnet-2",
+                    "value": "akashnet-2"
+                },
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "PBFA97CFB590B2093"
+                },
+                "definition": "label_values(tendermint_consensus_height{job=\"$network\"},chain_id)",
                 "hide": 0,
                 "includeAll": false,
                 "label": "",
@@ -5464,7 +5478,7 @@
                 "options": [],
                 "query": {
                     "qryType": 1,
-                    "query": "label_values(cosmos_validator_status,chain_id)",
+                    "query": "label_values(tendermint_consensus_height{job=\"$network\"},chain_id)",
                     "refId": "PrometheusVariableQueryEditor-VariableQuery"
                 },
                 "refresh": 1,
@@ -5503,7 +5517,7 @@
             },
             {
                 "current": {
-                    "selected": true,
+                    "selected": false,
                     "text": "135.148.123.8:9100",
                     "value": "135.148.123.8:9100"
                 },
@@ -5537,6 +5551,6 @@
     "timezone": "",
     "title": "Cosmos Validator",
     "uid": "cosmos_validator",
-    "version": 6,
+    "version": 8,
     "weekStart": ""
 }
