@@ -150,7 +150,7 @@
               "uid": "${DS_PROMETHEUS}"
             },
             "editorMode": "code",
-            "expr": "cloudflare_zone_requests_total{zone=\"$zone\"}",
+            "expr": "increase(cloudflare_zone_requests_total{zone=\"$zone\"}[$__range])",
             "instant": true,
             "interval": "",
             "legendFormat": "",
@@ -1974,7 +1974,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.0.5",
+        "pluginVersion": "10.4.2",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -2074,7 +2074,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.0.5",
+        "pluginVersion": "10.4.2",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -2173,7 +2173,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.0.5",
+        "pluginVersion": "10.4.2",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -2295,7 +2295,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.0.5",
+        "pluginVersion": "10.4.2",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -2388,7 +2388,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.0.5",
+        "pluginVersion": "10.4.2",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -2481,7 +2481,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.0.5",
+        "pluginVersion": "10.4.2",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -2601,7 +2601,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "9.0.5",
+        "pluginVersion": "10.4.2",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -2663,7 +2663,7 @@
       "list": [
         {
           "current": {
-            "selected": true,
+            "selected": false,
             "text": "default",
             "value": "default"
           },
@@ -2751,6 +2751,6 @@
     "timezone": "",
     "title": "CloudFlare Zone Analytics",
     "uid": "mWxtnz5Mz",
-    "version": 20,
+    "version": 22,
     "weekStart": ""
   }
