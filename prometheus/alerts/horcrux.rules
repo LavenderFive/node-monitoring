@@ -1,0 +1,11 @@
+groups:
+- name: horcrux
+  rules:
+  - alert: HorcruxInstanceDown
+    expr: up{job=~".*horcrux.*"} == 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Instance {{ $labels.instance }} down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
